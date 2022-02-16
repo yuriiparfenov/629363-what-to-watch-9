@@ -1,4 +1,4 @@
-import FilmPage from '../film-page/film-page';
+import FilmPage from '../small-film-card/small-film-card';
 
 type MainPageProps = {
   filmTitle: string;
@@ -8,6 +8,7 @@ type MainPageProps = {
 
 function MainPage({filmTitle, filmJanre, filmYear}: MainPageProps): JSX.Element {
   const arrayOfNumber : number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+
   return (
     <>
       <div className="visually-hidden">

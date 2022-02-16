@@ -6,7 +6,8 @@ type AppScreenProps = {
   filmYear: string;
 }
 
-function App({filmTitle, filmJanre, filmYear}: AppScreenProps): JSX.Element {
+function App( {filmTitle, filmJanre, filmYear}: AppScreenProps ): JSX.Element {
+
   return (
     <MainPage
       filmTitle = {filmTitle}

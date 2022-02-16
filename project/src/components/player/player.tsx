@@ -1,6 +1,7 @@
 const LeftStyle : { left: string;} = { left: '30%'};
 
 function Player(): JSX.Element {
+
   return (
     <>
       <div className="visually-hidden">

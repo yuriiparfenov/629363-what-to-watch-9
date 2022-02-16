@@ -1,4 +1,5 @@
-function FilmPage(): JSX.Element {
+function SmallFilmCard(): JSX.Element {
+
   return (
     <article className="small-film-card catalog__films-card">
       <div className="small-film-card__image">
@@ -11,4 +12,4 @@ function FilmPage(): JSX.Element {
   );
 }
 
-export default FilmPage;
+export default SmallFilmCard;
