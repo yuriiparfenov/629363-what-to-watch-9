@@ -11,9 +11,10 @@ const FilmSetting = {
 ReactDOM.render(
   <React.StrictMode>
     <App
-      filmTitle = {FilmSetting.FILM_TITLE}
-      filmJanre = {FilmSetting.FILM_JANRE}
-      filmYear = {FilmSetting.FILM_YEAR}
+      filmTitle={FilmSetting.FILM_TITLE}
+      filmJanre={FilmSetting.FILM_JANRE}
+      filmYear={FilmSetting.FILM_YEAR}
     />
   </React.StrictMode>,
-  document.getElementById('root'));
+  document.getElementById('root'),
+);
