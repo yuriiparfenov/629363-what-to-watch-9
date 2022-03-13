@@ -1,17 +1,23 @@
+import { Film } from '../../types/films';
 import HiddenElement from '../hidden-element/hidden-element';
 
 const LeftStyle: { left: string } = { left: '30%' };
 
-function Player(): JSX.Element {
+type PlayerProps = {
+  film: Film;
+};
+
+function Player({ film }: PlayerProps): JSX.Element {
+  const { srcPicture, srcVideo } = film;
   return (
     <>
       <HiddenElement />
 
       <div className="player">
         <video
-          src="#"
+          src={srcVideo}
           className="player__video"
-          poster="img/player-poster.jpg"
+          poster={srcPicture}
         >
         </video>
 

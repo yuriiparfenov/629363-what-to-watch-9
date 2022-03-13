@@ -1,7 +1,24 @@
+import { Link } from 'react-router-dom';
+import { Film, Films } from '../../types/films';
 import HiddenElement from '../hidden-element/hidden-element';
 import Logo from '../logo/logo';
+import MoviesList from '../movies-list/movies-list';
 
-function MoviePage(): JSX.Element {
+type MoviePageProps = {
+  films: Films;
+  film: Film;
+};
+
+function MoviePage({ films, film }: MoviePageProps): JSX.Element {
+  const {
+    title,
+    director,
+    starring,
+    genre,
+    released,
+    srcPicture,
+    unicId,
+  } = film;
   return (
     <>
       <HiddenElement />
@@ -10,15 +27,14 @@ function MoviePage(): JSX.Element {
         <div className="film-card__hero">
           <div className="film-card__bg">
             <img
-              src="img/bg-the-grand-budapest-hotel.jpg"
-              alt="The Grand Budapest Hotel"
+              src={srcPicture}
+              alt={title}
             />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
 
           <header className="page-header film-card__head">
-
             <Logo />
 
             <ul className="user-block">
@@ -42,10 +58,10 @@ function MoviePage(): JSX.Element {
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">The Grand Budapest Hotel</h2>
+              <h2 className="film-card__title">{title}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">Drama</span>
-                <span className="film-card__year">2014</span>
+                <span className="film-card__genre">{genre}</span>
+                <span className="film-card__year">{released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -67,9 +83,9 @@ function MoviePage(): JSX.Element {
                   </svg>
                   <span>My list</span>
                 </button>
-                <a href="add-review.html" className="btn film-card__button">
+                <Link to={`/films/:${unicId}/review`} className="btn film-card__button">
                   Add review
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -79,8 +95,8 @@ function MoviePage(): JSX.Element {
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
               <img
-                src="img/the-grand-budapest-hotel-poster.jpg"
-                alt="The Grand Budapest Hotel poster"
+                src={srcPicture}
+                alt={title}
                 width="218"
                 height="327"
               />
@@ -133,13 +149,12 @@ function MoviePage(): JSX.Element {
                 </p>
 
                 <p className="film-card__director">
-                  <strong>Director: Wes Anderson</strong>
+                  <strong>Director: {director}</strong>
                 </p>
 
                 <p className="film-card__starring">
                   <strong>
-                    Starring: Bill Murray, Edward Norton, Jude Law, Willem Dafoe
-                    and other
+                    Starring: {starring}
                   </strong>
                 </p>
               </div>
@@ -152,69 +167,7 @@ function MoviePage(): JSX.Element {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            <article className="small-film-card catalog__films-card">
-              <div className="small-film-card__image">
-                <img
-                  src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-                  alt="Fantastic Beasts: The Crimes of Grindelwald"
-                  width="280"
-                  height="175"
-                />
-              </div>
-              <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">
-                  Fantastic Beasts: The Crimes of Grindelwald
-                </a>
-              </h3>
-            </article>
-
-            <article className="small-film-card catalog__films-card">
-              <div className="small-film-card__image">
-                <img
-                  src="img/bohemian-rhapsody.jpg"
-                  alt="Bohemian Rhapsody"
-                  width="280"
-                  height="175"
-                />
-              </div>
-              <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">
-                  Bohemian Rhapsody
-                </a>
-              </h3>
-            </article>
-
-            <article className="small-film-card catalog__films-card">
-              <div className="small-film-card__image">
-                <img
-                  src="img/macbeth.jpg"
-                  alt="Macbeth"
-                  width="280"
-                  height="175"
-                />
-              </div>
-              <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">
-                  Macbeth
-                </a>
-              </h3>
-            </article>
-
-            <article className="small-film-card catalog__films-card">
-              <div className="small-film-card__image">
-                <img
-                  src="img/aviator.jpg"
-                  alt="Aviator"
-                  width="280"
-                  height="175"
-                />
-              </div>
-              <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">
-                  Aviator
-                </a>
-              </h3>
-            </article>
+            <MoviesList films={films}/>
           </div>
         </section>
 

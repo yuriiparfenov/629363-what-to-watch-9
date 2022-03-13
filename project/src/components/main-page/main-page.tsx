@@ -1,22 +1,13 @@
 import HiddenElement from '../hidden-element/hidden-element';
 import Logo from '../logo/logo';
-import FilmPage from '../small-film-card/small-film-card';
+import MoviesList from '../movies-list/movies-list';
+import { Films } from '../../types/films';
 
 type MainPageProps = {
-  filmTitle: string;
-  filmJanre: string;
-  filmYear: string;
+  films: Films;
 };
 
-function MainPage({
-  filmTitle,
-  filmJanre,
-  filmYear,
-}: MainPageProps): JSX.Element {
-  const arrayOfNumber: number[] = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-  ];
-
+function MainPage({ films }: MainPageProps): JSX.Element {
   return (
     <>
       <HiddenElement />
@@ -65,10 +56,10 @@ function MainPage({
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{filmTitle}</h2>
+              <h2 className="film-card__title">{films[0].title}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{filmJanre}</span>
-                <span className="film-card__year">{filmYear}</span>
+                <span className="film-card__genre">{films[0].genre}</span>
+                <span className="film-card__year">{films[0].released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -154,9 +145,7 @@ function MainPage({
           </ul>
 
           <div className="catalog__films-list">
-            {arrayOfNumber.map((val) => (
-              <FilmPage key={val} />
-            ))}
+            <MoviesList films={films} />
           </div>
 
           <div className="catalog__more">

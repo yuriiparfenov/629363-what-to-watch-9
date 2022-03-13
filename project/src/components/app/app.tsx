@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
+import { Films } from '../../types/films';
 
 import MainPage from '../main-page/main-page';
 import MyList from '../my-list/my-list';
@@ -11,12 +12,10 @@ import MoviePage from '../movie-page/movie-page';
 import Player from '../player/player';
 
 type AppScreenProps = {
-  filmTitle: string;
-  filmJanre: string;
-  filmYear: string;
+  films: Films;
 };
 
-function App({ filmTitle, filmJanre, filmYear }: AppScreenProps): JSX.Element {
+function App({ films }: AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
@@ -24,9 +23,7 @@ function App({ filmTitle, filmJanre, filmYear }: AppScreenProps): JSX.Element {
           path={AppRoute.Main}
           element={
             <MainPage
-              filmTitle={filmTitle}
-              filmJanre={filmJanre}
-              filmYear={filmYear}
+              films={films}
             />
           }
         />
@@ -37,7 +34,7 @@ function App({ filmTitle, filmJanre, filmYear }: AppScreenProps): JSX.Element {
           path={AppRoute.MyList}
           element={
             <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-              <MyList />
+              <MyList films={films}/>
             </PrivateRoute>
           }
         />
@@ -46,14 +43,14 @@ function App({ filmTitle, filmJanre, filmYear }: AppScreenProps): JSX.Element {
           path={AppRoute.AddReview}
           element={
             <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-              <AddReview />
+              <AddReview film={films[0]}/>
             </PrivateRoute>
           }
         />
 
-        <Route path={AppRoute.Film} element={<MoviePage />} />
+        <Route path={AppRoute.MoviePage} element={<MoviePage films={films} film={films[0]}/>} />
 
-        <Route path={AppRoute.Player} element={<Player />} />
+        <Route path={AppRoute.Player} element={<Player film={films[0]}/>} />
 
         <Route path="*" element={<Error />} />
       </Routes>
