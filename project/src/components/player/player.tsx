@@ -9,14 +9,13 @@ type PlayerProps = {
 };
 
 function Player({ film }: PlayerProps): JSX.Element {
-  const isPlaying = false;
 
   return (
     <>
       <HiddenElement />
 
       <div className="player">
-        <VideoPlayer film={film} isPlaying={isPlaying}/>
+        <VideoPlayer film={film} isPlaying={false}/>
 
         <button type="button" className="player__exit">
           Exit
