@@ -1,5 +1,6 @@
 import { Film } from '../../types/films';
 import HiddenElement from '../hidden-element/hidden-element';
+import VideoPlayer from '../video-player/video-player';
 
 const LeftStyle: { left: string } = { left: '30%' };
 
@@ -8,18 +9,13 @@ type PlayerProps = {
 };
 
 function Player({ film }: PlayerProps): JSX.Element {
-  const { srcPicture, srcVideo } = film;
+
   return (
     <>
       <HiddenElement />
 
       <div className="player">
-        <video
-          src={srcVideo}
-          className="player__video"
-          poster={srcPicture}
-        >
-        </video>
+        <VideoPlayer film={film} isPlaying={false}/>
 
         <button type="button" className="player__exit">
           Exit
