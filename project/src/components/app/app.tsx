@@ -19,14 +19,7 @@ function App({ films }: AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path={AppRoute.Main}
-          element={
-            <MainPage
-              films={films}
-            />
-          }
-        />
+        <Route path={AppRoute.Main} element={<MainPage films={films} />} />
 
         <Route path="/login" element={<SignIn />} />
 
@@ -34,7 +27,7 @@ function App({ films }: AppScreenProps): JSX.Element {
           path={AppRoute.MyList}
           element={
             <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-              <MyList films={films}/>
+              <MyList films={films} />
             </PrivateRoute>
           }
         />
@@ -43,14 +36,19 @@ function App({ films }: AppScreenProps): JSX.Element {
           path={AppRoute.AddReview}
           element={
             <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-              <AddReview film={films[0]}/>
+              <AddReview film={films[0]} />
             </PrivateRoute>
           }
         />
 
-        <Route path={AppRoute.MoviePage} element={<MoviePage films={films} film={films[0]}/>} />
+        <Route path={AppRoute.MoviePage}>
+          <Route
+            path=":id/*"
+            element={<MoviePage films={films} />}
+          />
+        </Route>
 
-        <Route path={AppRoute.Player} element={<Player film={films[0]}/>} />
+        <Route path={AppRoute.Player} element={<Player film={films[0]} />} />
 
         <Route path="*" element={<Error />} />
       </Routes>
