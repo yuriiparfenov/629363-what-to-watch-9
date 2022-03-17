@@ -2,7 +2,7 @@ import { Link, useParams } from 'react-router-dom';
 import { Films } from '../../types/films';
 import HiddenElement from '../hidden-element/hidden-element';
 import Logo from '../logo/logo';
-import MoviesList from '../movies-list/movies-list';
+import SmallFilmCard from '../small-film-card/small-film-card';
 import Tabs from '../tabs/tabs';
 
 type MoviePageProps = {
@@ -102,7 +102,10 @@ function MoviePage({ films }: MoviePageProps): JSX.Element {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            <MoviesList films={films} />
+
+            {films.filter((item) => item.genre === film.genre && item.unicId !== film.unicId).slice(0, 4)
+              .map((filmElem) => <SmallFilmCard key={filmElem.unicId} movie={filmElem}/>)}
+
           </div>
         </section>
 
