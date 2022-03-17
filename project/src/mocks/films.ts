@@ -11,6 +11,22 @@ export const films : Films = [
     srcVideo: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
     srcPicture: 'img/fantastic-beasts-the-crimes-of-grindelwald.jpg',
     unicId: 1,
+    description: 'Gustave prides himself on providing first-class service to the hotel\'s guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave\'s lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.',
+    rating: '8,3',
+    reviews: [
+      {
+        revText: 'Discerning travellers and Wes Anderson fans will luxuriate in the glorious',
+        revAuthor: 'Kate',
+        revDate: '24 december, 2014',
+        revRating: '7,2',
+      },
+      {
+        revText: 'Discerning travellers and Wes Anderson fans will luxuriate in the glorious',
+        revAuthor: 'Den',
+        revDate: '24 december, 2016',
+        revRating: '7,4',
+      },
+    ],
   },
   {
     title: 'Dardjeeling Limited',
@@ -22,6 +38,22 @@ export const films : Films = [
     srcVideo: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
     srcPicture: 'img/dardjeeling-limited.jpg',
     unicId: 2,
+    description: 'Gustave prides himself on providing first-class service to the hotel\'s guests',
+    rating: '5,1',
+    reviews: [
+      {
+        revText: 'Discerning travellers and Wes Anderson fans will luxuriate in the glorious',
+        revAuthor: 'Max',
+        revDate: '21 december, 2013',
+        revRating: '7,4',
+      },
+      {
+        revText: 'Discerning travellers and Wes Anderson fans will luxuriate in the glorious',
+        revAuthor: 'Den',
+        revDate: '24 december, 2015',
+        revRating: '7,8',
+      },
+    ],
   },
   {
     title: 'Aviator',
@@ -33,6 +65,22 @@ export const films : Films = [
     srcVideo: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
     srcPicture: 'img/aviator.jpg',
     unicId: 3,
+    description: '.....about Film Aviator',
+    rating: '8,7',
+    reviews: [
+      {
+        revText: 'Discerning travellers and Wes Anderson fans will luxuriate in the glorious',
+        revAuthor: 'Rob',
+        revDate: '22 december, 2018',
+        revRating: '7,3',
+      },
+      {
+        revText: 'Discerning travellers and Wes Anderson fans will luxuriate in the glorious',
+        revAuthor: 'Gven',
+        revDate: '21 december, 2013',
+        revRating: '7,9',
+      },
+    ],
   },
   {
     title: 'Bohemian-Rhapsody',
@@ -44,6 +92,22 @@ export const films : Films = [
     srcVideo: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
     srcPicture: 'img/bohemian-rhapsody.jpg',
     unicId: 4,
+    description: '.....about Film Bohemian-Rhapsody',
+    rating: '7,6',
+    reviews: [
+      {
+        revText: 'Discerning travellers and Wes Anderson fans will luxuriate in the glorious',
+        revAuthor: 'Milton',
+        revDate: '14 december, 2014',
+        revRating: '6,2',
+      },
+      {
+        revText: 'Discerning travellers and Wes Anderson fans will luxuriate in the glorious',
+        revAuthor: 'Maggy',
+        revDate: '24 december, 2019',
+        revRating: '7,5',
+      },
+    ],
   },
   {
     title: 'Macbeth',
@@ -55,6 +119,22 @@ export const films : Films = [
     srcVideo: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm',
     srcPicture: 'img/macbeth.jpg',
     unicId: 5,
+    description: '.....about Film Macbeth',
+    rating: '4,6',
+    reviews: [
+      {
+        revText: 'Discerning travellers and Wes Anderson fans will luxuriate in the glorious',
+        revAuthor: 'Artur',
+        revDate: '24 december, 2014',
+        revRating: '6,3',
+      },
+      {
+        revText: 'Discerning travellers and Wes Anderson fans will luxuriate in the glorious',
+        revAuthor: 'Molly',
+        revDate: '24 december, 2016',
+        revRating: '6,8',
+      },
+    ],
   },
   {
     title: 'Mindhunter',
@@ -66,6 +146,22 @@ export const films : Films = [
     srcVideo: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
     srcPicture: 'img/mindhunter.jpg',
     unicId: 6,
+    description: '.....about Film Mindhunter',
+    rating: '6,9',
+    reviews: [
+      {
+        revText: 'Discerning travellers and Wes Anderson fans will luxuriate in the glorious',
+        revAuthor: 'Kate',
+        revDate: '24 december, 2014',
+        revRating: '6,6',
+      },
+      {
+        revText: 'Discerning travellers and Wes Anderson fans will luxuriate in the glorious',
+        revAuthor: 'Denis',
+        revDate: '24 december, 2016',
+        revRating: '6,9',
+      },
+    ],
   },
   {
     title: 'Johnny English',
@@ -77,6 +173,22 @@ export const films : Films = [
     srcVideo: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm',
     srcPicture: 'img/johnny-english.jpg',
     unicId: 7,
+    description: '.....about Film Johnny English',
+    rating: '4,3',
+    reviews: [
+      {
+        revText: 'Discerning travellers and Wes Anderson fans will luxuriate in the glorious',
+        revAuthor: 'Katerina',
+        revDate: '24 december, 2014',
+        revRating: '5,2',
+      },
+      {
+        revText: 'Discerning travellers and Wes Anderson fans will luxuriate in the glorious',
+        revAuthor: 'Bolt',
+        revDate: '24 december, 2016',
+        revRating: '5,7',
+      },
+    ],
   },
   {
     title: 'Midnight Special',
@@ -88,5 +200,21 @@ export const films : Films = [
     srcVideo: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm',
     srcPicture: 'img/midnight-special.jpg',
     unicId: 8,
+    description: '.....about Film Midnight Special',
+    rating: '9,7',
+    reviews: [
+      {
+        revText: 'Discerning travellers and Wes Anderson fans will luxuriate in the glorious',
+        revAuthor: 'Stan',
+        revDate: '24 december, 2014',
+        revRating: '6,2',
+      },
+      {
+        revText: 'Discerning travellers and Wes Anderson fans will luxuriate in the glorious',
+        revAuthor: 'Peter',
+        revDate: '24 december, 2016',
+        revRating: '8,2',
+      },
+    ],
   },
 ];

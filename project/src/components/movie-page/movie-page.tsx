@@ -1,24 +1,20 @@
-import { Link } from 'react-router-dom';
-import { Film, Films } from '../../types/films';
+import { Link, useParams } from 'react-router-dom';
+import { Films } from '../../types/films';
 import HiddenElement from '../hidden-element/hidden-element';
 import Logo from '../logo/logo';
 import MoviesList from '../movies-list/movies-list';
+import Tabs from '../tabs/tabs';
 
 type MoviePageProps = {
   films: Films;
-  film: Film;
 };
 
-function MoviePage({ films, film }: MoviePageProps): JSX.Element {
-  const {
-    title,
-    director,
-    starring,
-    genre,
-    released,
-    srcPicture,
-    unicId,
-  } = film;
+function MoviePage({ films }: MoviePageProps): JSX.Element {
+
+  const { id } = useParams();
+  const film = films.find((item) => item.unicId === Number(id)) || films[0];
+  const { title, genre, released, srcPicture, unicId } = film;
+
   return (
     <>
       <HiddenElement />
@@ -26,10 +22,7 @@ function MoviePage({ films, film }: MoviePageProps): JSX.Element {
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img
-              src={srcPicture}
-              alt={title}
-            />
+            <img src={srcPicture} alt={title} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -83,7 +76,10 @@ function MoviePage({ films, film }: MoviePageProps): JSX.Element {
                   </svg>
                   <span>My list</span>
                 </button>
-                <Link to={`/films/:${unicId}/review`} className="btn film-card__button">
+                <Link
+                  to={`/films/:${unicId}/review`}
+                  className="btn film-card__button"
+                >
                   Add review
                 </Link>
               </div>
@@ -94,71 +90,10 @@ function MoviePage({ films, film }: MoviePageProps): JSX.Element {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img
-                src={srcPicture}
-                alt={title}
-                width="218"
-                height="327"
-              />
+              <img src={srcPicture} alt={title} width="218" height="327" />
             </div>
+            <Tabs film={film} />
 
-            <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  <li className="film-nav__item film-nav__item--active">
-                    <a href="/" className="film-nav__link">
-                      Overview
-                    </a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="/" className="film-nav__link">
-                      Details
-                    </a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="/" className="film-nav__link">
-                      Reviews
-                    </a>
-                  </li>
-                </ul>
-              </nav>
-
-              <div className="film-rating">
-                <div className="film-rating__score">8,9</div>
-                <p className="film-rating__meta">
-                  <span className="film-rating__level">Very good</span>
-                  <span className="film-rating__count">240 ratings</span>
-                </p>
-              </div>
-
-              <div className="film-card__text">
-                <p>
-                  In the 1930s, the Grand Budapest Hotel is a popular European
-                  ski resort, presided over by concierge Gustave H. (Ralph
-                  Fiennes). Zero, a junior lobby boy, becomes Gustave&apos;s
-                  friend and protege.
-                </p>
-
-                <p>
-                  Gustave prides himself on providing first-class service to the
-                  hotel&apos;s guests, including satisfying the sexual needs of
-                  the many elderly women who stay there. When one of
-                  Gustave&apos;s lovers dies mysteriously, Gustave finds himself
-                  the recipient of a priceless painting and the chief suspect in
-                  her murder.
-                </p>
-
-                <p className="film-card__director">
-                  <strong>Director: {director}</strong>
-                </p>
-
-                <p className="film-card__starring">
-                  <strong>
-                    Starring: {starring}
-                  </strong>
-                </p>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -167,7 +102,7 @@ function MoviePage({ films, film }: MoviePageProps): JSX.Element {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            <MoviesList films={films}/>
+            <MoviesList films={films} />
           </div>
         </section>
 
