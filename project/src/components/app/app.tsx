@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
-import { Films } from '../../types/films';
 
 import MainPage from '../main-page/main-page';
 import MyList from '../my-list/my-list';
@@ -10,16 +9,14 @@ import PrivateRoute from '../private-route/private-route';
 import AddReview from '../add-review/add-review';
 import MoviePage from '../movie-page/movie-page';
 import Player from '../player/player';
+import { useAppSelector } from '../../hooks';
 
-type AppScreenProps = {
-  films: Films;
-};
-
-function App({ films }: AppScreenProps): JSX.Element {
+function App(): JSX.Element {
+  const { films } = useAppSelector((state) => state);
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={AppRoute.Main} element={<MainPage films={films} />} />
+        <Route path={AppRoute.Main} element={<MainPage />} />
 
         <Route path="/login" element={<SignIn />} />
 
