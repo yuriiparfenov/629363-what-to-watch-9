@@ -1,12 +1,13 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { Genres } from '../const';
+import { FILMS_COINT, Genres } from '../const';
 import { films } from '../mocks/films';
-import { changeGenre, getSortFilmsByGenre } from './action';
+import { changeGenre, getSortFilmsByGenre, incFilmsCount, resetFilmsCount } from './action';
 
 const initialState = {
   genre: String(Genres.AllGenres),
   films: films,
   sortFilms: films,
+  filmsCount: FILMS_COINT,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -20,6 +21,12 @@ const reducer = createReducer(initialState, (builder) => {
       } else {
         state.sortFilms = films.filter((film) => film.genre === state.genre);
       }
+    })
+    .addCase(incFilmsCount, (state) => {
+      state.filmsCount +=FILMS_COINT;
+    })
+    .addCase(resetFilmsCount, (state) => {
+      state.filmsCount = FILMS_COINT;
     });
 });
 

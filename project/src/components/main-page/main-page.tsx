@@ -3,10 +3,10 @@ import Logo from '../logo/logo';
 import MoviesList from '../movies-list/movies-list';
 import GenreList from '../genres-list/genres-list';
 import { useAppSelector } from '../../hooks';
-
+import ShowMoreButton from '../show-more-button/show-more-button';
 
 function MainPage(): JSX.Element {
-  const { films, sortFilms } = useAppSelector((state) => state);
+  const { films, sortFilms, filmsCount } = useAppSelector((state) => state);
 
   return (
     <>
@@ -91,17 +91,13 @@ function MainPage(): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenreList films={films}/>
+          <GenreList films={films} />
 
           <div className="catalog__films-list">
-            <MoviesList films={sortFilms} />
+            <MoviesList films={sortFilms.slice(0, filmsCount)} />
           </div>
+          {(sortFilms.length - filmsCount) > 0 ? <ShowMoreButton /> : ''}
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">
-              Show more
-            </button>
-          </div>
         </section>
 
         <footer className="page-footer">

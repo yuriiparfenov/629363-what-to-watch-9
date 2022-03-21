@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Genres } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { changeGenre, getSortFilmsByGenre } from '../../store/action';
+import { changeGenre, getSortFilmsByGenre, resetFilmsCount } from '../../store/action';
 import { Films } from '../../types/films';
 
 type GenreListProps = {
@@ -29,6 +29,7 @@ function GenreList({ films }: GenreListProps): JSX.Element {
             onClick={() => {
               dispatch(changeGenre(item));
               dispatch(getSortFilmsByGenre());
+              dispatch(resetFilmsCount());
             }}
           >
             {item}
