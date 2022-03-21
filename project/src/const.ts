@@ -17,4 +17,4 @@ export enum Genres {
     AllGenres = 'All genres',
 }
 
-export const FILMS_COINT = 8;
+export const FILMS_COUNT = 8;
