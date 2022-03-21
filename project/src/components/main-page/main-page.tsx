@@ -96,7 +96,7 @@ function MainPage(): JSX.Element {
           <div className="catalog__films-list">
             <MoviesList films={sortFilms.slice(0, filmsCount)} />
           </div>
-          {(sortFilms.length - filmsCount) > 0 ? <ShowMoreButton /> : ''}
+          {(sortFilms.length - filmsCount) > 0 ? <ShowMoreButton /> : null}
 
         </section>
 
