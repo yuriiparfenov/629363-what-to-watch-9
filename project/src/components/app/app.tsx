@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 
 import MainPage from '../main-page/main-page';
@@ -10,11 +10,21 @@ import AddReview from '../add-review/add-review';
 import MoviePage from '../movie-page/movie-page';
 import Player from '../player/player';
 import { useAppSelector } from '../../hooks';
+import LoadingScreen from '../loading-screen/loading-screen';
+import HistoryRouter from '../history-route/history-route';
+import browserHistory from '../../browser-history';
 
 function App(): JSX.Element {
-  const { films } = useAppSelector((state) => state);
+  const { films, isDataLoaded } = useAppSelector((state) => state);
+
+  if (!isDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route path={AppRoute.Main} element={<MainPage />} />
 
@@ -49,7 +59,7 @@ function App(): JSX.Element {
 
         <Route path="*" element={<Error />} />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 

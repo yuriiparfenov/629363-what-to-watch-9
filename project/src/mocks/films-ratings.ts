@@ -32,3 +32,4 @@ export const ratings: Ratings = [
     rating: 1,
   },
 ];
+

@@ -26,7 +26,7 @@ function Tabs({ film }: TabsProps): JSX.Element {
             </Link>
           </li>
           <li className="film-nav__item">
-            <Link to={`/films/${film.unicId}/reviews`} className="film-nav__link">
+            <Link to={`/films/${film.id}/reviews`} className="film-nav__link">
               Reviews
             </Link>
           </li>
