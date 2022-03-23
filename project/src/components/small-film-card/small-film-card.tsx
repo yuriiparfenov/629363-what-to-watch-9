@@ -8,7 +8,7 @@ type SmallFilmCardProps = {
 };
 
 function SmallFilmCard({ movie }: SmallFilmCardProps): JSX.Element {
-  const { title, unicId } = movie;
+  const { name, id } = movie;
   const [isPlaying, setIsPlaying] = useState(false);
   let timer: ReturnType<typeof setTimeout>;
 
@@ -29,8 +29,8 @@ function SmallFilmCard({ movie }: SmallFilmCardProps): JSX.Element {
         <VideoPlayer film={movie} isPlaying={isPlaying} />
       </div>
       <h3 className="small-film-card__title">
-        <Link className="small-film-card__link" to={`/films/${unicId}`}>
-          {title}
+        <Link className="small-film-card__link" to={`/films/${id}`}>
+          {name}
         </Link>
       </h3>
     </article>

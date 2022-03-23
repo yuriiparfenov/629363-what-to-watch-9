@@ -1,13 +1,16 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { FILMS_COUNT, Genres } from '../const';
-import { films } from '../mocks/films';
-import { changeGenre, getSortFilmsByGenre, incrementFilmsCount, resetFilmsCount } from './action';
+import { initialStateType } from '../types/state';
+import { changeGenre, getSortFilmsByGenre, incrementFilmsCount, loadFilms, loadPromoFilm, resetFilmsCount, setError } from './action';
 
-const initialState = {
-  genre: String(Genres.AllGenres),
-  films: films,
-  sortFilms: films,
+const initialState: initialStateType = {
+  genre: Genres.AllGenres,
+  films: [],
+  sortFilms: [],
   filmsCount: FILMS_COUNT,
+  error: '',
+  isDataLoaded: false,
+  promoFilm: Object.assign({}),
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -19,7 +22,7 @@ const reducer = createReducer(initialState, (builder) => {
       if (state.genre === Genres.AllGenres) {
         state.sortFilms = state.films;
       } else {
-        state.sortFilms = films.filter((film) => film.genre === state.genre);
+        state.sortFilms = state.films.filter((film) => film.genre === state.genre);
       }
     })
     .addCase(incrementFilmsCount, (state) => {
@@ -27,6 +30,17 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(resetFilmsCount, (state) => {
       state.filmsCount = FILMS_COUNT;
+    })
+    .addCase(loadFilms, (state, action) => {
+      state.films = action.payload;
+      state.sortFilms = action.payload;
+      state.isDataLoaded = true;
+    })
+    .addCase(setError, (state, action) => {
+      state.error = action.payload;
+    })
+    .addCase(loadPromoFilm, (state, action) => {
+      state.promoFilm = action.payload;
     });
 });
 

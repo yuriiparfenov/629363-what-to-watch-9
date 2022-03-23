@@ -10,7 +10,7 @@ type AddReviewProps = {
 };
 
 function AddReview({ film }: AddReviewProps): JSX.Element {
-  const { title, srcPicture, unicId } = film;
+  const { name, posterImage, id } = film;
   return (
     <>
       <HiddenElement />
@@ -18,7 +18,7 @@ function AddReview({ film }: AddReviewProps): JSX.Element {
       <section className="film-card film-card--full">
         <div className="film-card__header">
           <div className="film-card__bg">
-            <img src={srcPicture} alt={title} />
+            <img src={posterImage} alt={name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -29,12 +29,12 @@ function AddReview({ film }: AddReviewProps): JSX.Element {
             <nav className="breadcrumbs">
               <ul className="breadcrumbs__list">
                 <li className="breadcrumbs__item">
-                  <Link to={`/films/${unicId}`} className="breadcrumbs__link">
-                    {title}
+                  <Link to={`/films/${id}`} className="breadcrumbs__link">
+                    {name}
                   </Link>
                 </li>
                 <li className="breadcrumbs__item">
-                  <Link to={`/films/:${unicId}/review`} className="breadcrumbs__link">
+                  <Link to={`/films/:${id}/review`} className="breadcrumbs__link">
                     Add review
                   </Link>
                 </li>
@@ -61,7 +61,7 @@ function AddReview({ film }: AddReviewProps): JSX.Element {
           </header>
 
           <div className="film-card__poster film-card__poster--small">
-            <img src={srcPicture} alt={title} width="218" height="327" />
+            <img src={posterImage} alt={name} width="218" height="327" />
           </div>
         </div>
 

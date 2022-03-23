@@ -5,7 +5,7 @@ type FilmDetailsProps = {
 };
 
 function FilmDetails({ film }: FilmDetailsProps): JSX.Element {
-  const { director, starring, unicId, runTime, genre, released } = film;
+  const { director, starring, id, runTime, genre, released } = film;
 
   return (
     <div className="film-card__text film-card__row">
@@ -18,7 +18,7 @@ function FilmDetails({ film }: FilmDetailsProps): JSX.Element {
           <strong className="film-card__details-name">Starring</strong>
           <span className="film-card__details-value">
             {starring.map((item) => (
-              <p key={`${item} - ${unicId}`}>
+              <p key={`${item} - ${id}`}>
                 {item}
                 <br />
               </p>

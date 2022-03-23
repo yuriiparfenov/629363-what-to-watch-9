@@ -17,4 +17,21 @@ export enum Genres {
     AllGenres = 'All genres',
 }
 
+export enum APIRoute {
+    films = '/films',
+    promoFilm = '/promo',
+    comments = '/comments',
+}
+
+export enum HTTP_CODE {
+    BAD_REQUEST = 400,
+    UNAUTHORIZED = 401,
+    NOT_FOUND = 404,
+}
+
 export const FILMS_COUNT = 8;
+export const BACKEND_URL = 'https://9.react.pages.academy/wtw';
+export const REQUEST_TIMEOUT = 5000;
+
+export const AUTH_TOKEN_KEY_NAME = 'what-to-watch-token';
+export const TIMEOUT_SHOW_ERROR = 2000;

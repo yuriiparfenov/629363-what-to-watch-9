@@ -12,8 +12,8 @@ type MoviePageProps = {
 function MoviePage({ films }: MoviePageProps): JSX.Element {
 
   const { id } = useParams();
-  const film = films.find((item) => item.unicId === Number(id)) || films[0];
-  const { title, genre, released, srcPicture, unicId } = film;
+  const film = films.find((item) => item.id === Number(id)) || films[0];
+  const { name, genre, released, posterImage } = film;
 
   return (
     <>
@@ -22,7 +22,7 @@ function MoviePage({ films }: MoviePageProps): JSX.Element {
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src={srcPicture} alt={title} />
+            <img src={posterImage} alt={name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -51,7 +51,7 @@ function MoviePage({ films }: MoviePageProps): JSX.Element {
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">{title}</h2>
+              <h2 className="film-card__title">{name}</h2>
               <p className="film-card__meta">
                 <span className="film-card__genre">{genre}</span>
                 <span className="film-card__year">{released}</span>
@@ -77,7 +77,7 @@ function MoviePage({ films }: MoviePageProps): JSX.Element {
                   <span>My list</span>
                 </button>
                 <Link
-                  to={`/films/:${unicId}/review`}
+                  to={`/films/:${id}/review`}
                   className="btn film-card__button"
                 >
                   Add review
@@ -90,7 +90,7 @@ function MoviePage({ films }: MoviePageProps): JSX.Element {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src={srcPicture} alt={title} width="218" height="327" />
+              <img src={posterImage} alt={name} width="218" height="327" />
             </div>
             <Tabs film={film} />
 
@@ -103,8 +103,8 @@ function MoviePage({ films }: MoviePageProps): JSX.Element {
 
           <div className="catalog__films-list">
 
-            {films.filter((item) => item.genre === film.genre && item.unicId !== film.unicId).slice(0, 4)
-              .map((filmElem) => <SmallFilmCard key={filmElem.unicId} movie={filmElem}/>)}
+            {films.filter((item) => item.genre === film.genre && item.id !== film.id).slice(0, 4)
+              .map((filmElem) => <SmallFilmCard key={filmElem.id} movie={filmElem}/>)}
 
           </div>
         </section>

@@ -6,7 +6,7 @@ import { useAppSelector } from '../../hooks';
 import ShowMoreButton from '../show-more-button/show-more-button';
 
 function MainPage(): JSX.Element {
-  const { films, sortFilms, filmsCount } = useAppSelector((state) => state);
+  const { films, sortFilms, filmsCount, promoFilm } = useAppSelector((state) => state);
 
   return (
     <>
@@ -48,18 +48,18 @@ function MainPage(): JSX.Element {
           <div className="film-card__info">
             <div className="film-card__poster">
               <img
-                src="img/the-grand-budapest-hotel-poster.jpg"
-                alt="The Grand Budapest Hotel poster"
+                src={promoFilm.posterImage}
+                alt={promoFilm.name}
                 width="218"
                 height="327"
               />
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{films[0].title}</h2>
+              <h2 className="film-card__title">{promoFilm.director}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{films[0].genre}</span>
-                <span className="film-card__year">{films[0].released}</span>
+                <span className="film-card__genre">{promoFilm.genre}</span>
+                <span className="film-card__year">{promoFilm.released}</span>
               </p>
 
               <div className="film-card__buttons">

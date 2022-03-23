@@ -6,19 +6,24 @@ export type Reviews = {
 }
 
 export type Film = {
-    title: string;
+    id: number;
+    name: string;
+    posterImage: string;
+    previewImage: string;
+    backgroundImage: string;
+    backgroundColor: string;
+    videoLink: string;
+    previewVideoLink: string;
+    description: string;
+    rating: number;
+    scoresCount: number;
     director: string;
-    starring: string[];
-    runTime: string;
+    starring: [string];
+    runTime: number;
     genre: string;
     released: number;
-    srcVideo: string;
-    srcPicture: string;
-    unicId: number;
-    description: string;
-    rating: string;
-    reviews: Reviews[];
-};
+    isFavorite: boolean;
+}
 
 export type Rating = {
     rating: number;
