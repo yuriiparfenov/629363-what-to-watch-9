@@ -23,8 +23,8 @@ function SignIn(): JSX.Element {
     if (
       loginRef.current !== null &&
       passwordRef.current !== null &&
-      loginRef.current.value.length !== 0 &&
-      passwordRef.current.value.length !== 0
+      loginRef.current.value.length &&
+      passwordRef.current.value.length
     ) {
       onSubmit({
         login: loginRef.current.value,

@@ -22,7 +22,7 @@ export enum APIRoute {
     promoFilm = '/promo',
     comments = '/comments',
     login = '/login',
-    logout = 'logout',
+    logout = '/logout',
 }
 
 export enum HTTP_CODE {
