@@ -9,6 +9,7 @@ export type initialStateType = {
     error: string;
     isDataLoaded: boolean;
     promoFilm: Film;
+    authorizationStatus: string;
 }
 
 export type State = ReturnType<typeof store.getState>;

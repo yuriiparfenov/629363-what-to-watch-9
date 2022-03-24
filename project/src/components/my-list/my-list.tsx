@@ -2,6 +2,7 @@ import { Films } from '../../types/films';
 import HiddenElement from '../hidden-element/hidden-element';
 import Logo from '../logo/logo';
 import MoviesList from '../movies-list/movies-list';
+import UserBlock from '../user-block/user-block';
 
 type MyListProps = {
   films: Films;
@@ -18,23 +19,7 @@ function MyList({ films }: MyListProps): JSX.Element {
 
           <h1 className="page-title user-page__title">My list</h1>
 
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img
-                  src="img/avatar.jpg"
-                  alt="User avatar"
-                  width="63"
-                  height="63"
-                />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <a href="/" className="user-block__link">
-                Sign out
-              </a>
-            </li>
-          </ul>
+          <UserBlock/>
         </header>
 
         <section className="catalog">

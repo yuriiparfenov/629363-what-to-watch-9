@@ -1,7 +1,39 @@
+import { FormEvent, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AppRoute } from '../../const';
+import { useAppDispatch } from '../../hooks';
+import { loginAction } from '../../store/api-action';
+import { AuthData } from '../../types/auth-data';
 import HiddenElement from '../hidden-element/hidden-element';
 import Logo from '../logo/logo';
 
 function SignIn(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const loginRef = useRef<HTMLInputElement | null>(null);
+  const passwordRef = useRef<HTMLInputElement | null>(null);
+
+  const onSubmit = (authData: AuthData) => {
+    dispatch(loginAction(authData));
+  };
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (
+      loginRef.current !== null &&
+      passwordRef.current !== null &&
+      loginRef.current.value.length &&
+      passwordRef.current.value.length
+    ) {
+      onSubmit({
+        login: loginRef.current.value,
+        password: passwordRef.current.value,
+      });
+      navigate(AppRoute.Main);
+    }
+  };
+
   return (
     <>
       <HiddenElement />
@@ -14,7 +46,7 @@ function SignIn(): JSX.Element {
         </header>
 
         <div className="sign-in user-page__content">
-          <form action="#" className="sign-in__form">
+          <form action="" className="sign-in__form" onSubmit={handleSubmit}>
             <div className="sign-in__fields">
               <div className="sign-in__field">
                 <input
@@ -23,6 +55,7 @@ function SignIn(): JSX.Element {
                   placeholder="Email address"
                   name="user-email"
                   id="user-email"
+                  ref={loginRef}
                 />
                 <label
                   className="sign-in__label visually-hidden"
@@ -38,6 +71,7 @@ function SignIn(): JSX.Element {
                   placeholder="Password"
                   name="user-password"
                   id="user-password"
+                  ref={passwordRef}
                 />
                 <label
                   className="sign-in__label visually-hidden"
