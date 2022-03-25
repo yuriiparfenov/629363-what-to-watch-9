@@ -1,17 +1,36 @@
-import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { APIRoute } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { ratings } from '../../mocks/films-ratings';
-import { Film } from '../../types/films';
+import { fetchSelectedFilmAction } from '../../store/api-action';
 import FormAddReview from '../form-add-review/form-add-review';
 import HiddenElement from '../hidden-element/hidden-element';
 import Logo from '../logo/logo';
 import UserBlock from '../user-block/user-block';
+import Error from '../error/error';
+import LoadingScreen from '../loading-screen/loading-screen';
+import { sentCommentFlag } from '../../store/action';
 
-type AddReviewProps = {
-  film: Film;
-};
+function AddReview(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const { id } = useParams();
+  const { selectedFilm: { name, posterImage }, isSelectFilmLoaded, errorResponse } = useAppSelector(
+    (state) => state);
 
-function AddReview({ film }: AddReviewProps): JSX.Element {
-  const { name, posterImage, id } = film;
+  useEffect(() => {
+    dispatch(fetchSelectedFilmAction(Number(id)));
+    dispatch(sentCommentFlag(false));
+  }, [dispatch, id]);
+
+  if (errorResponse) {
+    return <Error />;
+  }
+
+  if (!isSelectFilmLoaded) {
+    return <LoadingScreen />;
+  }
+
   return (
     <>
       <HiddenElement />
@@ -30,19 +49,25 @@ function AddReview({ film }: AddReviewProps): JSX.Element {
             <nav className="breadcrumbs">
               <ul className="breadcrumbs__list">
                 <li className="breadcrumbs__item">
-                  <Link to={`/films/${id}`} className="breadcrumbs__link">
+                  <Link
+                    to={`${APIRoute.films}/${id}`}
+                    className="breadcrumbs__link"
+                  >
                     {name}
                   </Link>
                 </li>
                 <li className="breadcrumbs__item">
-                  <Link to={`/films/:${id}/review`} className="breadcrumbs__link">
+                  <Link
+                    to={`${APIRoute.films}/${id}${APIRoute.reviews}`}
+                    className="breadcrumbs__link"
+                  >
                     Add review
                   </Link>
                 </li>
               </ul>
             </nav>
 
-            <UserBlock/>
+            <UserBlock />
           </header>
 
           <div className="film-card__poster film-card__poster--small">
@@ -51,7 +76,7 @@ function AddReview({ film }: AddReviewProps): JSX.Element {
         </div>
 
         <div className="add-review">
-          <FormAddReview ratings={ratings}/>
+          <FormAddReview ratings={ratings} />
         </div>
       </section>
     </>

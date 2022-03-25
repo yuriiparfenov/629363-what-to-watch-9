@@ -28,7 +28,7 @@ function App(): JSX.Element {
       <Routes>
         <Route path={AppRoute.Main} element={<MainPage />} />
 
-        <Route path="/login" element={<SignIn />} />
+        <Route path={AppRoute.Login} element={<SignIn />} />
 
         <Route
           path={AppRoute.MyList}
@@ -43,7 +43,7 @@ function App(): JSX.Element {
           path={AppRoute.AddReview}
           element={
             <PrivateRoute>
-              <AddReview film={films[0]} />
+              <AddReview />
             </PrivateRoute>
           }
         />
@@ -51,7 +51,7 @@ function App(): JSX.Element {
         <Route path={AppRoute.MoviePage}>
           <Route
             path=":id/*"
-            element={<MoviePage films={films} />}
+            element={<MoviePage />}
           />
         </Route>
 

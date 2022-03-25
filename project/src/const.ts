@@ -23,6 +23,11 @@ export enum APIRoute {
     comments = '/comments',
     login = '/login',
     logout = '/logout',
+    similar = '/similar',
+    reviews = '/reviews',
+    review = '/review',
+    overview = 'overview',
+    details = 'details',
 }
 
 export enum HTTP_CODE {
@@ -32,6 +37,7 @@ export enum HTTP_CODE {
 }
 
 export const FILMS_COUNT = 8;
+export const FILMS_SIMILAR_COUNT = 4;
 export const BACKEND_URL = 'https://9.react.pages.academy/wtw';
 export const REQUEST_TIMEOUT = 5000;
 
