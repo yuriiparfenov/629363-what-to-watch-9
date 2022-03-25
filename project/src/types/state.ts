@@ -1,5 +1,6 @@
 import { store } from '../store';
-import { Film, Films } from './films';
+import { ErrorType } from './error';
+import { Comments, Film, Films } from './films';
 
 export type initialStateType = {
     genre: string;
@@ -7,9 +8,15 @@ export type initialStateType = {
     sortFilms: Films;
     filmsCount: number;
     error: string;
+    errorResponse: ErrorType;
     isDataLoaded: boolean;
     promoFilm: Film;
     authorizationStatus: string;
+    selectedFilm: Film;
+    isSelectFilmLoaded: boolean;
+    similarFilms: Films;
+    selectedFilmComments: Comments;
+    isDataSent: boolean;
 }
 
 export type State = ReturnType<typeof store.getState>;

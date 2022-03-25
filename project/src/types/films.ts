@@ -29,6 +29,17 @@ export type Rating = {
     rating: number;
 }
 
+export type Comment = {
+    comment: string
+    date: string
+    id: number
+    rating: number
+    user: {
+        id: number
+        name: string
+    }
+}
 
 export type Films = Film[];
 export type Ratings = Rating[];
+export type Comments = Comment[];

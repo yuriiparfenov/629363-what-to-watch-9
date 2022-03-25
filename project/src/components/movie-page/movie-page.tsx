@@ -1,20 +1,44 @@
+import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Films } from '../../types/films';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import {
+  fetchSelectedFilmAction,
+  fetchSimilarFilmsAction
+} from '../../store/api-action';
 import HiddenElement from '../hidden-element/hidden-element';
+import LoadingScreen from '../loading-screen/loading-screen';
 import Logo from '../logo/logo';
 import SmallFilmCard from '../small-film-card/small-film-card';
 import Tabs from '../tabs/tabs';
 import UserBlock from '../user-block/user-block';
+import Error from '../error/error';
+import { APIRoute, AuthorizationStatus, FILMS_SIMILAR_COUNT } from '../../const';
 
-type MoviePageProps = {
-  films: Films;
-};
-
-function MoviePage({ films }: MoviePageProps): JSX.Element {
-
+function MoviePage(): JSX.Element {
   const { id } = useParams();
-  const film = films.find((item) => item.id === Number(id)) || films[0];
-  const { name, genre, released, posterImage } = film;
+  const dispatch = useAppDispatch();
+  const {
+    selectedFilm,
+    isSelectFilmLoaded,
+    errorResponse,
+    similarFilms,
+    authorizationStatus,
+  } = useAppSelector((state) => state);
+
+  useEffect(() => {
+    dispatch(fetchSelectedFilmAction(Number(id)));
+    dispatch(fetchSimilarFilmsAction(Number(id)));
+  }, [dispatch, id]);
+
+  if (errorResponse) {
+    return <Error />;
+  }
+
+  if (!isSelectFilmLoaded || !selectedFilm) {
+    return <LoadingScreen />;
+  }
+
+  const { name, genre, released, posterImage } = selectedFilm;
 
   return (
     <>
@@ -31,7 +55,7 @@ function MoviePage({ films }: MoviePageProps): JSX.Element {
           <header className="page-header film-card__head">
             <Logo />
 
-            <UserBlock/>
+            <UserBlock />
           </header>
 
           <div className="film-card__wrap">
@@ -61,12 +85,14 @@ function MoviePage({ films }: MoviePageProps): JSX.Element {
                   </svg>
                   <span>My list</span>
                 </button>
-                <Link
-                  to={`/films/:${id}/review`}
-                  className="btn film-card__button"
-                >
-                  Add review
-                </Link>
+                {authorizationStatus === AuthorizationStatus.Auth ? (
+                  <Link
+                    to={`${APIRoute.films}/${id}${APIRoute.review}`}
+                    className="btn film-card__button"
+                  >
+                    Add review
+                  </Link>
+                ) : null}
               </div>
             </div>
           </div>
@@ -77,8 +103,7 @@ function MoviePage({ films }: MoviePageProps): JSX.Element {
             <div className="film-card__poster film-card__poster--big">
               <img src={posterImage} alt={name} width="218" height="327" />
             </div>
-            <Tabs film={film} />
-
+            <Tabs film={selectedFilm} />
           </div>
         </div>
       </section>
@@ -87,10 +112,12 @@ function MoviePage({ films }: MoviePageProps): JSX.Element {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-
-            {films.filter((item) => item.genre === film.genre && item.id !== film.id).slice(0, 4)
-              .map((filmElem) => <SmallFilmCard key={filmElem.id} movie={filmElem}/>)}
-
+            {similarFilms
+              .filter((item) => item.id !== selectedFilm.id)
+              .slice(0, FILMS_SIMILAR_COUNT)
+              .map((filmElem) => (
+                <SmallFilmCard key={filmElem.id} movie={filmElem} />
+              ))}
           </div>
         </section>
 

@@ -4,9 +4,10 @@ import { errorHandle } from '../services/error-handle';
 import { dropToken, saveToken } from '../services/token';
 import { api, store } from '../store';
 import { AuthData } from '../types/auth-data';
-import { Film, Films } from '../types/films';
+import { CommentData } from '../types/comment-data';
+import { Comments, Film, Films } from '../types/films';
 import { UserData } from '../types/user-data';
-import { loadFilms, loadPromoFilm, requireAuthorization, setError } from './action';
+import { getErrorResponse, loadFilms, loadPromoFilm, loadSelectedFilm, loadSelectedFilmComments, loadSimilarFilms, requireAuthorization, sentCommentFlag, setError } from './action';
 
 export const clearErrorAction = createAsyncThunk(
   'main/clearError',
@@ -84,4 +85,53 @@ export const logoutAction = createAsyncThunk(
   },
 );
 
+export const fetchSelectedFilmAction = createAsyncThunk(
+  'data/fetchSelectedFilms',
+  async(id: number) => {
+    try {
+      store.dispatch(getErrorResponse(''));
+      const { data } = await api.get<Film>(`${APIRoute.films}/${id}`);
+      store.dispatch(loadSelectedFilm(data));
+    } catch (error) {
+      errorHandle(error);
+      store.dispatch(getErrorResponse(error));
+    }
+  },
+);
 
+export const fetchSimilarFilmsAction = createAsyncThunk(
+  'data/fetchSimilarFilms',
+  async(id: number) => {
+    try {
+      const { data } = await api.get<Films>(`${APIRoute.films}/${id}${APIRoute.similar}`);
+      store.dispatch(loadSimilarFilms(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const fetchSelectedFilmCommentsAction = createAsyncThunk(
+  'data/fetchSelectedFilmComments',
+  async(id: number) => {
+    try {
+      const { data } = await api.get<Comments>(`${APIRoute.comments}/${id}`);
+      store.dispatch(loadSelectedFilmComments(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const postSelectedFilmCommentAction = createAsyncThunk(
+  'user/postSelectedFilmComment',
+  async ({ id, comment, rating }: CommentData) => {
+    try {
+      await api.post<CommentData>(`${APIRoute.comments}/${id}`, { comment, rating });
+      store.dispatch(sentCommentFlag(true));
+    } catch (error) {
+      errorHandle(error);
+      store.dispatch(sentCommentFlag(false));
+    }
+  },
+);
