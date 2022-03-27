@@ -16,7 +16,7 @@ function FilmReviews({ film }: FilmReviewsProps): JSX.Element {
     dispatch(fetchSelectedFilmCommentsAction(Number(id)));
   }, [dispatch, id]);
 
-  const { selectedFilmComments } = useAppSelector((state) => state);
+  const { selectedFilmComments } = useAppSelector(({ DATA }) => DATA);
 
   const countLeftColumnComments =
     selectedFilmComments.length % 2 === 0
@@ -75,7 +75,7 @@ function FilmReviews({ film }: FilmReviewsProps): JSX.Element {
                 </footer>
               </blockquote>
 
-              <div className="review__rating">{rating}</div>
+              <div className="review__rating">{rating.toFixed(1)}</div>
             </div>
           ),
         )}

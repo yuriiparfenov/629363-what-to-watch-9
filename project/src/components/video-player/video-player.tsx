@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { START_CURRENT_TIME } from '../../const';
 import { Film } from '../../types/films';
 
 type VideoPlayerProps = {
@@ -21,7 +22,7 @@ function VideoPlayer({ film, isPlaying }: VideoPlayerProps): JSX.Element {
     }
 
     videoRef.current.pause();
-    videoRef.current.currentTime = 0;
+    videoRef.current.currentTime = START_CURRENT_TIME;
     videoRef.current.load();
 
   }, [isPlaying, videoLink]);

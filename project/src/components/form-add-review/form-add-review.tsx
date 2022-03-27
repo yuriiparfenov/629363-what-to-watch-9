@@ -1,9 +1,9 @@
 import { FormEvent, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { APIRoute } from '../../const';
+import { APIRoute, DISABLE_RATING, MAX_TEXTAREA_LENGTH, MIN_TEXTAREA_LENGTH } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { sentCommentFlag } from '../../store/action';
 import { postSelectedFilmCommentAction } from '../../store/api-action';
+import { sentCommentFlag } from '../../store/data-process/data-process';
 import { CommentData } from '../../types/comment-data';
 import { Ratings } from '../../types/films';
 
@@ -12,10 +12,10 @@ type FormAddReviewProps = {
 };
 
 function FormAddReview({ ratings }: FormAddReviewProps): JSX.Element {
-  const [ratingOfMovie, setRatingOfMovie] = useState(0);
+  const [ratingOfMovie, setRatingOfMovie] = useState(DISABLE_RATING);
   const [reviewComment, setReviewComment] = useState('');
   const navigate = useNavigate();
-  const { isDataSent } = useAppSelector((state) => state);
+  const { isDataSent } = useAppSelector(({ DATA }) => DATA);
 
   const { id } = useParams();
   const dispatch = useAppDispatch();
@@ -49,7 +49,7 @@ function FormAddReview({ ratings }: FormAddReviewProps): JSX.Element {
                 type="radio"
                 name="rating"
                 value={rating}
-                key={rating * 0.004}
+                key={rating}
                 onChange={(e) => setRatingOfMovie(Number(e.target.value))}
               />
               <label className="rating__label" htmlFor={`star-${rating}`}>
@@ -66,8 +66,8 @@ function FormAddReview({ ratings }: FormAddReviewProps): JSX.Element {
           name="review-text"
           id="review-text"
           placeholder="Review text"
-          maxLength={400}
-          minLength={50}
+          maxLength={MAX_TEXTAREA_LENGTH}
+          minLength={MIN_TEXTAREA_LENGTH}
           value={reviewComment}
           onChange={(e) => setReviewComment(e.target.value)}
         >
@@ -77,9 +77,9 @@ function FormAddReview({ ratings }: FormAddReviewProps): JSX.Element {
             className="add-review__btn"
             type="submit"
             disabled={
-              ratingOfMovie === 0 ||
-              reviewComment.length < 50 ||
-              reviewComment.length > 400 ||
+              ratingOfMovie === DISABLE_RATING ||
+              reviewComment.length < MIN_TEXTAREA_LENGTH ||
+              reviewComment.length > MAX_TEXTAREA_LENGTH ||
               isDataSent
             }
           >

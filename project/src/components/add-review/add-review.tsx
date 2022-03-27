@@ -10,13 +10,13 @@ import Logo from '../logo/logo';
 import UserBlock from '../user-block/user-block';
 import Error from '../error/error';
 import LoadingScreen from '../loading-screen/loading-screen';
-import { sentCommentFlag } from '../../store/action';
+import { sentCommentFlag } from '../../store/data-process/data-process';
 
 function AddReview(): JSX.Element {
   const dispatch = useAppDispatch();
   const { id } = useParams();
   const { selectedFilm: { name, posterImage }, isSelectFilmLoaded, errorResponse } = useAppSelector(
-    (state) => state);
+    ({ DATA }) => DATA);
 
   useEffect(() => {
     dispatch(fetchSelectedFilmAction(Number(id)));
