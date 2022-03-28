@@ -16,14 +16,14 @@ function FilmDetails({ film }: FilmDetailsProps): JSX.Element {
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Starring</strong>
-          <span className="film-card__details-value">
+          <div className="film-card__details-value">
             {starring.map((item) => (
               <p key={`${item} - ${id}`}>
                 {item}
                 <br />
               </p>
             ))}
-          </span>
+          </div>
         </p>
       </div>
 

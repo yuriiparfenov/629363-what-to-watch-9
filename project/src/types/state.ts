@@ -2,21 +2,26 @@ import { store } from '../store';
 import { ErrorType } from './error';
 import { Comments, Film, Films } from './films';
 
-export type initialStateType = {
+export type DataProcess = {
     genre: string;
-    films: Films;
-    sortFilms: Films;
-    filmsCount: number;
-    error: string;
-    errorResponse: ErrorType;
-    isDataLoaded: boolean;
-    promoFilm: Film;
+    films: Films,
+    sortFilms: Films,
+    isDataLoaded: boolean,
+    promoFilm: Film,
+    selectedFilm: Film,
+    errorResponse: ErrorType,
+    similarFilms: Films,
+    selectedFilmComments: Comments,
+    isDataSent: boolean,
+    isSelectFilmLoaded: boolean,
+}
+
+export type UserProcess = {
     authorizationStatus: string;
-    selectedFilm: Film;
-    isSelectFilmLoaded: boolean;
-    similarFilms: Films;
-    selectedFilmComments: Comments;
-    isDataSent: boolean;
+}
+
+export type ContentProcess = {
+    filmsCount: number;
 }
 
 export type State = ReturnType<typeof store.getState>;

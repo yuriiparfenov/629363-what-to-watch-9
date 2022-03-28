@@ -36,10 +36,20 @@ export enum HTTP_CODE {
     NOT_FOUND = 404,
 }
 
+export enum NameSpace {
+    Data = 'DATA',
+    User = 'USER',
+    Content = 'CONTENT',
+}
+
 export const FILMS_COUNT = 8;
 export const FILMS_SIMILAR_COUNT = 4;
+export const MIN_TEXTAREA_LENGTH = 50;
+export const MAX_TEXTAREA_LENGTH = 400;
+export const DISABLE_RATING = 0;
+export const START_CURRENT_TIME = 0;
+
 export const BACKEND_URL = 'https://9.react.pages.academy/wtw';
 export const REQUEST_TIMEOUT = 5000;
 
 export const AUTH_TOKEN_KEY_NAME = 'what-to-watch-token';
-export const TIMEOUT_SHOW_ERROR = 2000;
