@@ -9,11 +9,13 @@ const initialState: DataProcess = {
   isDataLoaded: false,
   promoFilm: Object.assign({}),
   selectedFilm: Object.assign({}),
+  favoriteFilmsList: [],
   errorResponse: '',
   similarFilms: [],
   selectedFilmComments: [],
   isDataSent: false,
   isSelectFilmLoaded: false,
+  isFavoriteFilmSent: false,
 };
 
 export const dataProcess = createSlice({
@@ -56,6 +58,12 @@ export const dataProcess = createSlice({
     sentCommentFlag: (state, action) => {
       state.isDataSent = action.payload;
     },
+    loadFavoriteFilmsList: (state, action) => {
+      state.favoriteFilmsList = action.payload;
+    },
+    sentFavoriteFilmFlag: (state, action) => {
+      state.isFavoriteFilmSent = action.payload;
+    },
   },
 });
 
@@ -69,4 +77,6 @@ export const {
   loadSimilarFilms,
   loadSelectedFilmComments,
   sentCommentFlag,
+  loadFavoriteFilmsList,
+  sentFavoriteFilmFlag,
 } = dataProcess.actions;

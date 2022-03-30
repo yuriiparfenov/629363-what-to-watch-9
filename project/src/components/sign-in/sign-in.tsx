@@ -1,6 +1,5 @@
 import { FormEvent, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AppRoute } from '../../const';
 import { useAppDispatch } from '../../hooks';
 import { loginAction } from '../../store/api-action';
 import { AuthData } from '../../types/auth-data';
@@ -31,7 +30,7 @@ function SignIn(): JSX.Element {
         login: loginRef.current.value,
         password: passwordRef.current.value,
       });
-      navigate(AppRoute.Main);
+      navigate(-1);
     }
   };
 
