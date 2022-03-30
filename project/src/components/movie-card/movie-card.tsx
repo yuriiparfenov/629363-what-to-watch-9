@@ -1,18 +1,24 @@
-import { Link } from 'react-router-dom';
-import { APIRoute, AuthorizationStatus } from '../../const';
+import { Link, useNavigate } from 'react-router-dom';
+import { APIRoute, AppRoute, AuthorizationStatus } from '../../const';
 import { Film } from '../../types/films';
 import Logo from '../logo/logo';
+import MyListButton from '../my-list-button/my-list-button';
 import Tabs from '../tabs/tabs';
 import UserBlock from '../user-block/user-block';
 
 type MovieCardProps = {
-    selectedFilm: Film;
-    authorizationStatus: string;
-    id: string | undefined;
-}
+  selectedFilm: Film;
+  authorizationStatus: string;
+  id: string | undefined;
+};
 
-function MovieCard({ selectedFilm, authorizationStatus, id }: MovieCardProps): JSX.Element {
-  const { name, genre, released, posterImage } = selectedFilm;
+function MovieCard({
+  selectedFilm,
+  authorizationStatus,
+  id,
+}: MovieCardProps): JSX.Element {
+  const { name, genre, released, posterImage, id: idSelectedFilm } = selectedFilm;
+  const navigate = useNavigate();
 
   return (
     <section className="film-card film-card--full">
@@ -38,18 +44,19 @@ function MovieCard({ selectedFilm, authorizationStatus, id }: MovieCardProps): J
             </p>
 
             <div className="film-card__buttons">
-              <button className="btn btn--play film-card__button" type="button">
+              <button
+                className="btn btn--play film-card__button"
+                type="button"
+                onClick={() => navigate(`${AppRoute.Player}/${id}`)}
+              >
                 <svg viewBox="0 0 19 19" width="19" height="19">
                   <use xlinkHref="#play-s"></use>
                 </svg>
                 <span>Play</span>
               </button>
-              <button className="btn btn--list film-card__button" type="button">
-                <svg viewBox="0 0 19 20" width="19" height="20">
-                  <use xlinkHref="#add"></use>
-                </svg>
-                <span>My list</span>
-              </button>
+
+              <MyListButton id={idSelectedFilm}/>
+
               {authorizationStatus === AuthorizationStatus.Auth ? (
                 <Link
                   to={`${APIRoute.films}/${id}${APIRoute.review}`}

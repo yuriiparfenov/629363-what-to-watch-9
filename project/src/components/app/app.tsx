@@ -15,12 +15,10 @@ import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
 
 function App(): JSX.Element {
-  const { films, isDataLoaded } = useAppSelector(({ DATA }) => DATA);
+  const { isDataLoaded } = useAppSelector(({ DATA }) => DATA);
 
   if (!isDataLoaded) {
-    return (
-      <LoadingScreen />
-    );
+    return <LoadingScreen />;
   }
 
   return (
@@ -34,7 +32,7 @@ function App(): JSX.Element {
           path={AppRoute.MyList}
           element={
             <PrivateRoute>
-              <MyList films={films} />
+              <MyList />
             </PrivateRoute>
           }
         />
@@ -49,13 +47,12 @@ function App(): JSX.Element {
         />
 
         <Route path={AppRoute.MoviePage}>
-          <Route
-            path=":id/*"
-            element={<MoviePage />}
-          />
+          <Route path=":id/*" element={<MoviePage />} />
         </Route>
 
-        <Route path={AppRoute.Player} element={<Player film={films[0]} />} />
+        <Route path={AppRoute.Player}>
+          <Route path=":id/*" element={<Player />} />
+        </Route>
 
         <Route path="*" element={<Error />} />
       </Routes>

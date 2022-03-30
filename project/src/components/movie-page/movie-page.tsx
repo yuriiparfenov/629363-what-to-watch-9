@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import {
-  fetchSelectedFilmAction,
   fetchSimilarFilmsAction
 } from '../../store/api-action';
 import HiddenElement from '../hidden-element/hidden-element';
@@ -12,12 +11,13 @@ import Error from '../error/error';
 import { FILMS_SIMILAR_COUNT } from '../../const';
 import Footer from '../footer/footer';
 import MovieCard from '../movie-card/movie-card';
+import useFilm from '../../hooks/useFilm';
 
 function MoviePage(): JSX.Element {
   const { id } = useParams();
   const dispatch = useAppDispatch();
+  const selectedFilm = useFilm(id);
   const {
-    selectedFilm,
     isSelectFilmLoaded,
     errorResponse,
     similarFilms,
@@ -25,7 +25,6 @@ function MoviePage(): JSX.Element {
   const { authorizationStatus } = useAppSelector(({ USER }) => USER);
 
   useEffect(() => {
-    dispatch(fetchSelectedFilmAction(Number(id)));
     dispatch(fetchSimilarFilmsAction(Number(id)));
   }, [dispatch, id]);
 

@@ -1,6 +1,9 @@
 import { memo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AppRoute } from '../../const';
 import { Film } from '../../types/films';
 import Logo from '../logo/logo';
+import MyListButton from '../my-list-button/my-list-button';
 import UserBlock from '../user-block/user-block';
 
 type PromoFilmCardProps = {
@@ -8,7 +11,8 @@ type PromoFilmCardProps = {
 };
 
 function PromoFilmCard({ promoFilm }: PromoFilmCardProps): JSX.Element {
-  const { posterImage, name, director, genre, released } = promoFilm;
+  const { posterImage, name, director, genre, released, id } = promoFilm;
+  const navigate = useNavigate();
 
   return (
     <section className="film-card">
@@ -27,12 +31,7 @@ function PromoFilmCard({ promoFilm }: PromoFilmCardProps): JSX.Element {
       <div className="film-card__wrap">
         <div className="film-card__info">
           <div className="film-card__poster">
-            <img
-              src={posterImage}
-              alt={name}
-              width="218"
-              height="327"
-            />
+            <img src={posterImage} alt={name} width="218" height="327" />
           </div>
 
           <div className="film-card__desc">
@@ -43,18 +42,18 @@ function PromoFilmCard({ promoFilm }: PromoFilmCardProps): JSX.Element {
             </p>
 
             <div className="film-card__buttons">
-              <button className="btn btn--play film-card__button" type="button">
+              <button
+                className="btn btn--play film-card__button"
+                type="button"
+                onClick={() => navigate(`${AppRoute.Player}/${id}`)}
+              >
                 <svg viewBox="0 0 19 19" width="19" height="19">
                   <use xlinkHref="#play-s"></use>
                 </svg>
                 <span>Play</span>
               </button>
-              <button className="btn btn--list film-card__button" type="button">
-                <svg viewBox="0 0 19 20" width="19" height="20">
-                  <use xlinkHref="#add"></use>
-                </svg>
-                <span>My list</span>
-              </button>
+
+              <MyListButton id={id}/>
             </div>
           </div>
         </div>
@@ -63,4 +62,7 @@ function PromoFilmCard({ promoFilm }: PromoFilmCardProps): JSX.Element {
   );
 }
 
-export default memo(PromoFilmCard, (prevProps, nextProps) => prevProps.promoFilm === nextProps.promoFilm);
+export default memo(
+  PromoFilmCard,
+  (prevProps, nextProps) => prevProps.promoFilm === nextProps.promoFilm,
+);

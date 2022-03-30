@@ -6,15 +6,18 @@ import { api, store } from '../store';
 import { AuthData } from '../types/auth-data';
 import { CommentData } from '../types/comment-data';
 import { Comments, Film, Films } from '../types/films';
+import { FavoriteFilmData } from '../types/favorite-film-data';
 import { UserData } from '../types/user-data';
 import {
   getErrorResponse,
+  loadFavoriteFilmsList,
   loadFilms,
   loadPromoFilm,
   loadSelectedFilm,
   loadSelectedFilmComments,
   loadSimilarFilms,
-  sentCommentFlag
+  sentCommentFlag,
+  sentFavoriteFilmFlag
 } from './data-process/data-process';
 import { requireAuthorization } from './user-process/user-process';
 
@@ -132,6 +135,31 @@ export const postSelectedFilmCommentAction = createAsyncThunk(
     } catch (error) {
       errorHandle(error);
       store.dispatch(sentCommentFlag(false));
+    }
+  },
+);
+
+export const fetchFavoriteFilmsListAction = createAsyncThunk(
+  'data/fetchFavoriteFilmsList',
+  async () => {
+    try {
+      const { data } = await api.get<Films>(APIRoute.favorite);
+      store.dispatch(loadFavoriteFilmsList(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const postFavoriteFilmAction = createAsyncThunk(
+  'data/postFavoriteFilm',
+  async ({ id, favoriteStatus }: FavoriteFilmData) => {
+    try {
+      await api.post<FavoriteFilmData>(`${APIRoute.favorite}/${id}/${favoriteStatus}`);
+      store.dispatch(sentFavoriteFilmFlag(true));
+    } catch (error) {
+      errorHandle(error);
+      store.dispatch(sentFavoriteFilmFlag(false));
     }
   },
 );

@@ -9,11 +9,13 @@ export type DataProcess = {
     isDataLoaded: boolean,
     promoFilm: Film,
     selectedFilm: Film,
+    favoriteFilmsList: Films,
     errorResponse: ErrorType,
     similarFilms: Films,
     selectedFilmComments: Comments,
     isDataSent: boolean,
     isSelectFilmLoaded: boolean,
+    isFavoriteFilmSent: boolean,
 }
 
 export type UserProcess = {

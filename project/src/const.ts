@@ -4,7 +4,7 @@ export enum AppRoute {
     MyList = '/mylist',
     MoviePage = '/films',
     AddReview = '/films/:id/review',
-    Player = '/player/:id',
+    Player = '/player',
 }
 
 export enum AuthorizationStatus {
@@ -28,6 +28,7 @@ export enum APIRoute {
     review = '/review',
     overview = 'overview',
     details = 'details',
+    favorite = '/favorite',
 }
 
 export enum HTTP_CODE {
@@ -40,6 +41,13 @@ export enum NameSpace {
     Data = 'DATA',
     User = 'USER',
     Content = 'CONTENT',
+}
+
+export enum TextRating {
+    Bad = 'Bad',
+    Normal = 'Normal',
+    Good = 'Good',
+    Very_Good = 'Very good',
 }
 
 export const FILMS_COUNT = 8;
