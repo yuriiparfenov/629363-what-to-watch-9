@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import {
+  fetchSelectedFilmAction,
   fetchSimilarFilmsAction
 } from '../../store/api-action';
 import HiddenElement from '../hidden-element/hidden-element';
@@ -11,20 +12,24 @@ import Error from '../error/error';
 import { FILMS_SIMILAR_COUNT } from '../../const';
 import Footer from '../footer/footer';
 import MovieCard from '../movie-card/movie-card';
-import useFilm from '../../hooks/useFilm';
+import { Films } from '../../types/films';
 
 function MoviePage(): JSX.Element {
-  const { id } = useParams();
   const dispatch = useAppDispatch();
-  const selectedFilm = useFilm(id);
+  const { id } = useParams();
   const {
     isSelectFilmLoaded,
     errorResponse,
     similarFilms,
+    selectedFilm,
   } = useAppSelector(({ DATA }) => DATA);
   const { authorizationStatus } = useAppSelector(({ USER }) => USER);
+  const filteredSimilarFilms = useMemo<Films>(() => similarFilms
+    .filter((item) => item.id !== selectedFilm.id)
+    .slice(0, FILMS_SIMILAR_COUNT), [selectedFilm.id, similarFilms]);
 
   useEffect(() => {
+    dispatch(fetchSelectedFilmAction(Number(id)));
     dispatch(fetchSimilarFilmsAction(Number(id)));
   }, [dispatch, id]);
 
@@ -51,12 +56,9 @@ function MoviePage(): JSX.Element {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            {similarFilms
-              .filter((item) => item.id !== selectedFilm.id)
-              .slice(0, FILMS_SIMILAR_COUNT)
-              .map((filmElem) => (
-                <SmallFilmCard key={filmElem.id} movie={filmElem} />
-              ))}
+            {filteredSimilarFilms.map((filmElem) => (
+              <SmallFilmCard key={filmElem.id} movie={filmElem} />
+            ))}
           </div>
         </section>
 

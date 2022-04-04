@@ -1,3 +1,4 @@
+import { SORT_FILM_BEGIN } from '../../const';
 import { Films } from '../../types/films';
 import GenreList from '../genres-list/genres-list';
 import MoviesList from '../movies-list/movies-list';
@@ -17,9 +18,9 @@ function CatalogMainPage({ films, sortFilms, filmsCount }: CatalogMainPageProps)
       <GenreList films={films} />
 
       <div className="catalog__films-list">
-        <MoviesList films={sortFilms.slice(0, filmsCount)} />
+        <MoviesList films={sortFilms.slice(SORT_FILM_BEGIN, filmsCount)} />
       </div>
-      {sortFilms.length - filmsCount > 0 ? <ShowMoreButton /> : null}
+      {sortFilms.length - filmsCount > SORT_FILM_BEGIN ? <ShowMoreButton /> : null}
     </section>
   );
 }

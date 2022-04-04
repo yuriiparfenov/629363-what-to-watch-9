@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { APIRoute, ON_MOUSE_ENTER_TIMER } from '../../const';
 import { Film } from '../../types/films';
 import VideoPlayer from '../video-player/video-player';
 
@@ -13,7 +14,7 @@ function SmallFilmCard({ movie }: SmallFilmCardProps): JSX.Element {
   let timer: ReturnType<typeof setTimeout>;
 
   const handleMouseEnter = () => {
-    timer = setTimeout(() => setIsPlaying(true), 1000);
+    timer = setTimeout(() => setIsPlaying(true), ON_MOUSE_ENTER_TIMER);
   };
   const handleMouseLeave = () => {
     setIsPlaying(false);
@@ -29,7 +30,7 @@ function SmallFilmCard({ movie }: SmallFilmCardProps): JSX.Element {
         <VideoPlayer film={movie} isPlaying={isPlaying} />
       </div>
       <h3 className="small-film-card__title">
-        <Link className="small-film-card__link" to={`/films/${id}`}>
+        <Link className="small-film-card__link" to={`${APIRoute.films}/${id}`}>
           {name}
         </Link>
       </h3>
