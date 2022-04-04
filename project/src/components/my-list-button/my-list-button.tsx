@@ -21,7 +21,7 @@ function MyListButton({ id, isFavorite }: MyListButtonProps): JSX.Element {
     }
     const status: number = isFavorite ? 0 : 1;
     dispatch(postFavoriteFilmAction({id: Number(id), favoriteStatus: status}));
-  }, [authorizationStatus, isFavorite, dispatch, id]);
+  }, [authorizationStatus, isFavorite, dispatch, id, navigate]);
 
   return (
     <button
