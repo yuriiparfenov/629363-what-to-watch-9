@@ -20,15 +20,15 @@ import {
 } from './api-action';
 import { requireAuthorization } from './user-process/user-process';
 import {
-  createFakeFavoriteFilmData,
-  createFakeFilm,
-  createFakePostComment,
-  createFakeUser,
-  fakeCommentsArray,
-  fakeFavoriteFilmsList,
-  fakeFilmsList,
-  fakeMockId
-} from '../utils/fake-mocks';
+  createMockFavoriteFilmData,
+  createMockFilm,
+  createMockPostComment,
+  createMockUser,
+  mockedCommentsArray,
+  mockedFavoriteFilmsList,
+  mockedFilmsList,
+  MockId
+} from '../utils/mocks';
 import { AuthData } from '../types/auth-data';
 import {
   loadFavoriteFilmsList,
@@ -54,7 +54,7 @@ describe('Async actions', () => {
 
   it('should dispatch Load Films when GET /films', async () => {
     const store = mockStore();
-    const mockFilms = fakeFilmsList;
+    const mockFilms = mockedFilmsList;
 
     mockAPI.onGet(APIRoute.films).reply(200, mockFilms);
 
@@ -67,7 +67,7 @@ describe('Async actions', () => {
 
   it('should dispatch Load PromoFilm when GET /promo', async () => {
     const store = mockStore();
-    const mockFilm = createFakeFilm();
+    const mockFilm = createMockFilm();
 
     mockAPI.onGet(APIRoute.promoFilm).reply(200, mockFilm);
 
@@ -92,14 +92,14 @@ describe('Async actions', () => {
   });
 
   it('should dispatch RequriedAuthorization and RedirectToRoute when POST /login', async () => {
-    const fakeUser: AuthData = createFakeUser();
+    const mockUser: AuthData = createMockUser();
 
     mockAPI.onPost(APIRoute.login).reply(200, { token: 'secret' });
 
     const store = mockStore();
     Storage.prototype.setItem = jest.fn();
 
-    await store.dispatch(loginAction(fakeUser));
+    await store.dispatch(loginAction(mockUser));
 
     const actions = store.getActions().map(({ type }) => type);
 
@@ -130,11 +130,11 @@ describe('Async actions', () => {
 
   it('should dispatch Load SelectedFilm when GET /films/id', async () => {
     const store = mockStore();
-    const mockFilm = createFakeFilm();
+    const mockFilm = createMockFilm();
 
-    mockAPI.onGet(`${APIRoute.films}/${fakeMockId}`).reply(200, mockFilm);
+    mockAPI.onGet(`${APIRoute.films}/${MockId}`).reply(200, mockFilm);
 
-    await store.dispatch(fetchSelectedFilmAction(fakeMockId));
+    await store.dispatch(fetchSelectedFilmAction(MockId));
 
     const actions = store.getActions().map(({ type }) => type);
 
@@ -143,11 +143,11 @@ describe('Async actions', () => {
 
   it('should dispatch Load SimilarFilms when GET /similar', async () => {
     const store = mockStore();
-    const mockFilms = fakeFilmsList;
+    const mockFilms = mockedFilmsList;
 
-    mockAPI.onGet(`${APIRoute.films}/${fakeMockId}${APIRoute.similar}`).reply(200, mockFilms);
+    mockAPI.onGet(`${APIRoute.films}/${MockId}${APIRoute.similar}`).reply(200, mockFilms);
 
-    await store.dispatch(fetchSimilarFilmsAction(fakeMockId));
+    await store.dispatch(fetchSimilarFilmsAction(MockId));
 
     const actions = store.getActions().map(({ type }) => type);
 
@@ -156,11 +156,11 @@ describe('Async actions', () => {
 
   it('should dispatch Load Comments when GET /comments/id', async () => {
     const store = mockStore();
-    const mockComments = fakeCommentsArray;
+    const mockComments = mockedCommentsArray;
 
-    mockAPI.onGet(`${APIRoute.comments}/${fakeMockId}`).reply(200, mockComments);
+    mockAPI.onGet(`${APIRoute.comments}/${MockId}`).reply(200, mockComments);
 
-    await store.dispatch(fetchSelectedFilmCommentsAction(fakeMockId));
+    await store.dispatch(fetchSelectedFilmCommentsAction(MockId));
 
     const actions = store.getActions().map(({ type }) => type);
 
@@ -170,7 +170,7 @@ describe('Async actions', () => {
 
   it('should dispatch Load Favorite Films when GET /favorite', async () => {
     const store = mockStore();
-    const mockFilms = fakeFilmsList;
+    const mockFilms = mockedFilmsList;
 
     mockAPI.onGet(APIRoute.favorite).reply(200, mockFilms);
 
@@ -183,9 +183,9 @@ describe('Async actions', () => {
 
   it('should dispatch sent Comments Flag when POST /comments/id', async () => {
     const store = mockStore();
-    const mockComments = createFakePostComment();
+    const mockComments = createMockPostComment();
 
-    mockAPI.onGet(`${APIRoute.comments}/${fakeMockId}`).reply(200, mockComments);
+    mockAPI.onGet(`${APIRoute.comments}/${MockId}`).reply(200, mockComments);
 
     expect(store.getActions()).toEqual([]);
 
@@ -197,14 +197,14 @@ describe('Async actions', () => {
 
   it('should dispatch post Favorite Film when POST /favorite', async () => {
     const store = mockStore();
-    const fakeFavoriteFilms = fakeFavoriteFilmsList;
-    const fakeFavoriteFilmData = createFakeFavoriteFilmData();
+    const mockFavoriteFilms = mockedFavoriteFilmsList;
+    const mockFavoriteFilmData = createMockFavoriteFilmData();
 
-    mockAPI.onGet(`${APIRoute.favorite}/${fakeMockId}/${fakeFavoriteFilmData.favoriteStatus}`).reply(200, fakeFavoriteFilms);
+    mockAPI.onGet(`${APIRoute.favorite}/${MockId}/${mockFavoriteFilmData.favoriteStatus}`).reply(200, mockFavoriteFilms);
 
     expect(store.getActions()).toEqual([]);
 
-    await store.dispatch(postFavoriteFilmAction(fakeFavoriteFilmData));
+    await store.dispatch(postFavoriteFilmAction(mockFavoriteFilmData));
 
     expect(store.getActions().find(({type}) => loadSelectedFilm.toString())).toBeDefined();
     expect(store.getActions().find(({type}) => sentFavoriteFilmFlag.toString())).toBeDefined();

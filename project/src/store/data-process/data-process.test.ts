@@ -1,6 +1,30 @@
 import { DataProcess } from '../../types/state';
-import { createFakeFilm, fakeCommentFlag, fakeCommentsArray, fakeErrorResponse, fakeFavoriteFilmsList, fakeFavoriteFlag, fakeFilmsList, fakeGenre, fakeSelectedFilmFlag, fakeSimilarFilmsList } from '../../utils/fake-mocks';
-import { changeGenre, dataProcess, getErrorResponse, getSortFilmsByGenre, loadFavoriteFilmsList, loadFilms, loadPromoFilm, loadSelectedFilm, loadSelectedFilmComments, loadSimilarFilms, sentCommentFlag, sentFavoriteFilmFlag } from './data-process';
+import {
+  createMockFilm,
+  mokecdCommentFlag,
+  mockedCommentsArray,
+  mockedErrorResponse,
+  mockedFavoriteFilmsList,
+  mockedFavoriteFlag,
+  mockedSelectedFilmFlag,
+  mockedSimilarFilmsList,
+  mockedFilmsList,
+  mockGenre
+} from '../../utils/mocks';
+import {
+  changeGenre,
+  dataProcess,
+  getErrorResponse,
+  getSortFilmsByGenre,
+  loadFavoriteFilmsList,
+  loadFilms,
+  loadPromoFilm,
+  loadSelectedFilm,
+  loadSelectedFilmComments,
+  loadSimilarFilms,
+  sentCommentFlag,
+  sentFavoriteFilmFlag
+} from './data-process';
 
 describe('Reducer: dataProcess', () => {
   const initialState: DataProcess = {
@@ -20,55 +44,117 @@ describe('Reducer: dataProcess', () => {
   };
 
   it('change active films genre', () => {
-    expect(dataProcess.reducer(initialState, changeGenre(fakeGenre))).toEqual(Object.assign({}, initialState, {genre: fakeGenre}));
+    expect(dataProcess.reducer(initialState, changeGenre(mockGenre))).toEqual(
+      Object.assign({}, initialState, { genre: mockGenre }),
+    );
   });
 
   it('should get sort array films by genres', () => {
-    expect(dataProcess.reducer(initialState, getSortFilmsByGenre())).toEqual(Object.assign({}, initialState));
+    expect(dataProcess.reducer(initialState, getSortFilmsByGenre())).toEqual(
+      Object.assign({}, initialState),
+    );
   });
 
   it('should update Films Array state', () => {
-    expect(dataProcess.reducer(initialState, loadFilms(fakeFilmsList))).toEqual(Object.assign({}, initialState, {films: fakeFilmsList}, {sortFilms: fakeFilmsList}, {isDataLoaded: true}));
+    expect(
+      dataProcess.reducer(initialState, loadFilms(mockedFilmsList)),
+    ).toEqual(
+      Object.assign(
+        {},
+        initialState,
+        { films: mockedFilmsList },
+        { sortFilms: mockedFilmsList },
+        { isDataLoaded: true },
+      ),
+    );
   });
 
   it('should update promo Film state', () => {
-    const fakePromoFilm = createFakeFilm();
-    expect(dataProcess.reducer(initialState, loadPromoFilm(fakePromoFilm))).toEqual(Object.assign({}, initialState, {promoFilm: fakePromoFilm}));
+    const mockPromoFilm = createMockFilm();
+    expect(
+      dataProcess.reducer(initialState, loadPromoFilm(mockPromoFilm)),
+    ).toEqual(Object.assign({}, initialState, { promoFilm: mockPromoFilm }));
   });
 
   it('should update selected Film state', () => {
-    const fakeSelectedFilm = createFakeFilm();
-    const fakeSelectedFilmLoadFlag = fakeSelectedFilmFlag;
-    expect(dataProcess.reducer(initialState, loadSelectedFilm(fakeSelectedFilm))).toEqual(Object.assign({}, initialState, {selectedFilm: fakeSelectedFilm}, {isSelectFilmLoaded: fakeSelectedFilmLoadFlag}));
+    const mockSelectedFilm = createMockFilm();
+    const mockSelectedFilmLoadFlag = mockedSelectedFilmFlag;
+    expect(
+      dataProcess.reducer(initialState, loadSelectedFilm(mockSelectedFilm)),
+    ).toEqual(
+      Object.assign(
+        {},
+        initialState,
+        { selectedFilm: mockSelectedFilm },
+        { isSelectFilmLoaded: mockSelectedFilmLoadFlag },
+      ),
+    );
   });
 
   it('should update errorResponse state', () => {
-    const fakeErrorRespone = fakeErrorResponse;
-    expect(dataProcess.reducer(initialState, getErrorResponse(fakeErrorRespone))).toEqual(Object.assign({}, initialState, {errorResponse: fakeErrorRespone}));
+    const mockErrorRespone = mockedErrorResponse;
+    expect(
+      dataProcess.reducer(initialState, getErrorResponse(mockErrorRespone)),
+    ).toEqual(
+      Object.assign({}, initialState, { errorResponse: mockErrorRespone }),
+    );
   });
 
   it('should update similar films state', () => {
-    const fakeSimilarFilms = fakeSimilarFilmsList;
-    expect(dataProcess.reducer(initialState, loadSimilarFilms(fakeSimilarFilms))).toEqual(Object.assign({}, initialState, {similarFilms: fakeSimilarFilms}));
+    const mockSimilarFilms = mockedSimilarFilmsList;
+    expect(
+      dataProcess.reducer(initialState, loadSimilarFilms(mockSimilarFilms)),
+    ).toEqual(
+      Object.assign({}, initialState, { similarFilms: mockSimilarFilms }),
+    );
   });
 
   it('should update comments state', () => {
-    const fakeCommentsList = fakeCommentsArray;
-    expect(dataProcess.reducer(initialState, loadSelectedFilmComments(fakeCommentsList))).toEqual(Object.assign({}, initialState, {selectedFilmComments: fakeCommentsList}));
+    const mockCommentsList = mockedCommentsArray;
+    expect(
+      dataProcess.reducer(
+        initialState,
+        loadSelectedFilmComments(mockCommentsList),
+      ),
+    ).toEqual(
+      Object.assign({}, initialState, {
+        selectedFilmComments: mockCommentsList,
+      }),
+    );
   });
 
   it('should update sentComment flag', () => {
-    const fakeSentCommentFlag = fakeCommentFlag;
-    expect(dataProcess.reducer(initialState, sentCommentFlag(fakeSentCommentFlag))).toEqual(Object.assign({}, initialState, {isDataSent: fakeSentCommentFlag}));
+    const mockSentCommentFlag = mokecdCommentFlag;
+    expect(
+      dataProcess.reducer(initialState, sentCommentFlag(mockSentCommentFlag)),
+    ).toEqual(
+      Object.assign({}, initialState, { isDataSent: mockSentCommentFlag }),
+    );
   });
 
   it('should update favorite films state', () => {
-    const fakeFavoriteFilms = fakeFavoriteFilmsList;
-    expect(dataProcess.reducer(initialState, loadFavoriteFilmsList(fakeFavoriteFilms))).toEqual(Object.assign({}, initialState, {favoriteFilmsList: fakeFavoriteFilms}));
+    const mockFavoriteFilms = mockedFavoriteFilmsList;
+    expect(
+      dataProcess.reducer(
+        initialState,
+        loadFavoriteFilmsList(mockFavoriteFilms),
+      ),
+    ).toEqual(
+      Object.assign({}, initialState, { favoriteFilmsList: mockFavoriteFilms }),
+    );
   });
 
   it('should update isFavoriteFilmSent flag', () => {
-    const fakeSentFavoriteFlag = fakeFavoriteFlag;
-    expect(dataProcess.reducer(initialState, sentFavoriteFilmFlag(fakeSentFavoriteFlag))).toEqual(Object.assign({}, initialState, {isFavoriteFilmSent: fakeSentFavoriteFlag}));
+    const mockSentFavoriteFlag = mockedFavoriteFlag;
+    expect(
+      dataProcess.reducer(
+        initialState,
+        sentFavoriteFilmFlag(mockSentFavoriteFlag),
+      ),
+    ).toEqual(
+      Object.assign({}, initialState, {
+        isFavoriteFilmSent: mockSentFavoriteFlag,
+      }),
+    );
   });
 });
