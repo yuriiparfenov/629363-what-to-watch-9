@@ -56,6 +56,8 @@ export const MIN_TEXTAREA_LENGTH = 50;
 export const MAX_TEXTAREA_LENGTH = 400;
 export const DISABLE_RATING = 0;
 export const START_CURRENT_TIME = 0;
+export const SORT_FILM_BEGIN = 0;
+export const ON_MOUSE_ENTER_TIMER = 1000;
 
 export const BACKEND_URL = 'https://9.react.pages.academy/wtw';
 export const REQUEST_TIMEOUT = 5000;

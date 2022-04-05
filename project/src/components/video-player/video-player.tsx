@@ -8,7 +8,7 @@ type VideoPlayerProps = {
 };
 
 function VideoPlayer({ film, isPlaying }: VideoPlayerProps): JSX.Element {
-  const { posterImage, videoLink } = film;
+  const { posterImage, previewVideoLink } = film;
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
@@ -25,12 +25,12 @@ function VideoPlayer({ film, isPlaying }: VideoPlayerProps): JSX.Element {
     videoRef.current.currentTime = START_CURRENT_TIME;
     videoRef.current.load();
 
-  }, [isPlaying, videoLink]);
+  }, [isPlaying, previewVideoLink]);
 
   return (
     <video
       ref={videoRef}
-      src={videoLink}
+      src={previewVideoLink}
       className="player__video"
       poster={posterImage}
       muted

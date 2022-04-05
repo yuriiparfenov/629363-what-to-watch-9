@@ -1,38 +1,27 @@
-import { useEffect, useState } from 'react';
+import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchSelectedFilmAction, postFavoriteFilmAction } from '../../store/api-action';
+import { postFavoriteFilmAction } from '../../store/api-action';
 
 type MyListButtonProps = {
   id: number;
+  isFavorite: boolean;
 }
 
-function MyListButton({ id }: MyListButtonProps): JSX.Element {
+function MyListButton({ id, isFavorite }: MyListButtonProps): JSX.Element {
 
   const { authorizationStatus } = useAppSelector(({ USER }) => USER);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { selectedFilm: { isFavorite }} = useAppSelector(({ DATA }) => DATA);
-  const [isStatus, setIsStatus] = useState(isFavorite);
 
-  const handleChangeMylistClick = () => {
+  const handleChangeMylistClick = useCallback(() => {
     if (authorizationStatus !== AuthorizationStatus.Auth) {
       navigate(AppRoute.Login);
     }
     const status: number = isFavorite ? 0 : 1;
-    setIsStatus(!isStatus);
     dispatch(postFavoriteFilmAction({id: Number(id), favoriteStatus: status}));
-  };
-
-  useEffect(() => {
-    dispatch(fetchSelectedFilmAction(id));
-    if (authorizationStatus !== AuthorizationStatus.Auth) {
-      setIsStatus(isFavorite);
-    }
-    setIsStatus(isFavorite);
-
-  }, [dispatch, id]);
+  }, [authorizationStatus, isFavorite, dispatch, id, navigate]);
 
   return (
     <button
@@ -40,7 +29,7 @@ function MyListButton({ id }: MyListButtonProps): JSX.Element {
       type="button"
       onClick={handleChangeMylistClick}
     >
-      {isStatus ? (
+      {isFavorite ? (
         <svg viewBox="0 0 18 14" width="18" height="14">
           <use xlinkHref="#in-list"></use>
         </svg>

@@ -17,7 +17,7 @@ function MovieCard({
   authorizationStatus,
   id,
 }: MovieCardProps): JSX.Element {
-  const { name, genre, released, posterImage, id: idSelectedFilm } = selectedFilm;
+  const { name, genre, released, posterImage, isFavorite } = selectedFilm;
   const navigate = useNavigate();
 
   return (
@@ -55,7 +55,7 @@ function MovieCard({
                 <span>Play</span>
               </button>
 
-              <MyListButton id={idSelectedFilm}/>
+              <MyListButton id={Number(id)} isFavorite={isFavorite}/>
 
               {authorizationStatus === AuthorizationStatus.Auth ? (
                 <Link

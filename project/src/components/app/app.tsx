@@ -11,8 +11,6 @@ import MoviePage from '../movie-page/movie-page';
 import Player from '../player/player';
 import { useAppSelector } from '../../hooks';
 import LoadingScreen from '../loading-screen/loading-screen';
-import HistoryRouter from '../history-route/history-route';
-import browserHistory from '../../browser-history';
 
 function App(): JSX.Element {
   const { isDataLoaded } = useAppSelector(({ DATA }) => DATA);
@@ -22,41 +20,39 @@ function App(): JSX.Element {
   }
 
   return (
-    <HistoryRouter history={browserHistory}>
-      <Routes>
-        <Route path={AppRoute.Main} element={<MainPage />} />
+    <Routes>
+      <Route path={AppRoute.Main} element={<MainPage />} />
 
-        <Route path={AppRoute.Login} element={<SignIn />} />
+      <Route path={AppRoute.Login} element={<SignIn />} />
 
-        <Route
-          path={AppRoute.MyList}
-          element={
-            <PrivateRoute>
-              <MyList />
-            </PrivateRoute>
-          }
-        />
+      <Route
+        path={AppRoute.MyList}
+        element={
+          <PrivateRoute>
+            <MyList />
+          </PrivateRoute>
+        }
+      />
 
-        <Route
-          path={AppRoute.AddReview}
-          element={
-            <PrivateRoute>
-              <AddReview />
-            </PrivateRoute>
-          }
-        />
+      <Route
+        path={AppRoute.AddReview}
+        element={
+          <PrivateRoute>
+            <AddReview />
+          </PrivateRoute>
+        }
+      />
 
-        <Route path={AppRoute.MoviePage}>
-          <Route path=":id/*" element={<MoviePage />} />
-        </Route>
+      <Route path={AppRoute.MoviePage}>
+        <Route path=":id/*" element={<MoviePage />} />
+      </Route>
 
-        <Route path={AppRoute.Player}>
-          <Route path=":id/*" element={<Player />} />
-        </Route>
+      <Route path={AppRoute.Player}>
+        <Route path=":id/*" element={<Player />} />
+      </Route>
 
-        <Route path="*" element={<Error />} />
-      </Routes>
-    </HistoryRouter>
+      <Route path="*" element={<Error />} />
+    </Routes>
   );
 }
 

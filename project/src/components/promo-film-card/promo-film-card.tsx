@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../const';
+import { useAppSelector } from '../../hooks';
 import { Film } from '../../types/films';
 import Logo from '../logo/logo';
 import MyListButton from '../my-list-button/my-list-button';
@@ -11,8 +12,13 @@ type PromoFilmCardProps = {
 };
 
 function PromoFilmCard({ promoFilm }: PromoFilmCardProps): JSX.Element {
-  const { posterImage, name, director, genre, released, id } = promoFilm;
   const navigate = useNavigate();
+  const { posterImage, name, director, genre, released, id } = promoFilm;
+  const { selectedFilm } = useAppSelector(({ DATA }) => DATA);
+  let isFavorite = false;
+  if (id === selectedFilm.id) {
+    isFavorite = selectedFilm.isFavorite;
+  }
 
   return (
     <section className="film-card">
@@ -53,7 +59,7 @@ function PromoFilmCard({ promoFilm }: PromoFilmCardProps): JSX.Element {
                 <span>Play</span>
               </button>
 
-              <MyListButton id={id}/>
+              <MyListButton id={id} isFavorite={isFavorite} />
             </div>
           </div>
         </div>
