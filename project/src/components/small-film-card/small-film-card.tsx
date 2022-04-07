@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { APIRoute, ON_MOUSE_ENTER_TIMER } from '../../const';
 import { Film } from '../../types/films';
 import VideoPlayer from '../video-player/video-player';
@@ -12,6 +12,7 @@ function SmallFilmCard({ movie }: SmallFilmCardProps): JSX.Element {
   const { name, id } = movie;
   const [isPlaying, setIsPlaying] = useState(false);
   let timer: ReturnType<typeof setTimeout>;
+  const navigate = useNavigate();
 
   const handleMouseEnter = () => {
     timer = setTimeout(() => setIsPlaying(true), ON_MOUSE_ENTER_TIMER);
@@ -21,8 +22,12 @@ function SmallFilmCard({ movie }: SmallFilmCardProps): JSX.Element {
     clearTimeout(timer);
   };
 
+  const handleMouseClick = () => {
+    navigate(`${APIRoute.films}/${id}`);
+  };
+
   return (
-    <article className="small-film-card catalog__films-card">
+    <article className="small-film-card catalog__films-card" onClick={handleMouseClick}>
       <div className="small-film-card__image"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
