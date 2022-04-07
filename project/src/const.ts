@@ -50,6 +50,13 @@ export enum TextRating {
     Very_Good = 'Very good',
 }
 
+export enum NumberRating {
+    Bad = 3,
+    Normal = 5,
+    Good = 8,
+    Very_Good = 10,
+}
+
 export const FILMS_COUNT = 8;
 export const FILMS_SIMILAR_COUNT = 4;
 export const MIN_TEXTAREA_LENGTH = 50;

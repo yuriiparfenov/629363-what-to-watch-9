@@ -2,8 +2,8 @@ import { Link, Route, Routes, useLocation } from 'react-router-dom';
 import { APIRoute } from '../../const';
 import { Film } from '../../types/films';
 import FilmReviews from '../film-reviews/film-reviews';
-import FilmDetails from '../tabs-details/film-details';
-import FilmOverview from '../tabs-overview/film-overview';
+import FilmDetails from '../film-details/film-details';
+import FilmOverview from '../film-overview/film-overview';
 import classNames from 'classnames';
 
 type TabsProps = {

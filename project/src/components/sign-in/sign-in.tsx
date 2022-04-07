@@ -19,12 +19,14 @@ function SignIn(): JSX.Element {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const regPassword = /^.*(?=.{2,})(?=.*\d)(?=.*[a-zA-Z]).*$/i;
 
     if (
       loginRef.current !== null &&
       passwordRef.current !== null &&
       loginRef.current.value.length &&
-      passwordRef.current.value.length
+      passwordRef.current.value.length &&
+      regPassword.test(String(passwordRef.current.value).toLowerCase())
     ) {
       onSubmit({
         login: loginRef.current.value,

@@ -1,10 +1,3 @@
-export type Reviews = {
-    revText: string;
-    revAuthor: string;
-    revDate: string;
-    revRating: string;
-}
-
 export type Film = {
     id: number;
     name: string;

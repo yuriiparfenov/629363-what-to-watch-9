@@ -1,4 +1,4 @@
-import { TextRating } from '../../const';
+import { NumberRating, TextRating } from '../../const';
 import { Film } from '../../types/films';
 
 type FilmOverviewProps = {
@@ -9,19 +9,19 @@ function FilmOverview({ film }: FilmOverviewProps): JSX.Element {
   const { rating, description, director, starring, scoresCount } = film;
 
   const getTextRating = (numberRating : string | number) => {
-    if (numberRating <= 3 ) {
+    if (numberRating <= NumberRating.Bad ) {
       return TextRating.Bad;
     }
-    if (numberRating > 3 && rating <= 5 ) {
+    if (numberRating > NumberRating.Bad && rating <= NumberRating.Normal ) {
       return TextRating.Normal;
     }
-    if (numberRating > 5 && rating <= 8 ) {
+    if (numberRating > NumberRating.Normal && rating <= NumberRating.Good ) {
       return TextRating.Good;
     }
-    if (numberRating > 8 && numberRating <= 10) {
+    if (numberRating > NumberRating.Good && numberRating <= NumberRating.Very_Good) {
       return TextRating.Very_Good;
     }
-    if (numberRating > 10) {
+    if (numberRating > NumberRating.Very_Good) {
       return TextRating.Very_Good;
     }
   };
