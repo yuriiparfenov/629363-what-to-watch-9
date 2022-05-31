@@ -37,9 +37,7 @@ describe('Component: Logo', () => {
       </HistoryRouter>);
 
     expect(screen.queryByText(/This is main page/i)).not.toBeInTheDocument();
-
     userEvent.click(screen.getByRole('link'));
-
     expect(screen.getByText(/This is main page/i)).toBeInTheDocument();
   });
 });

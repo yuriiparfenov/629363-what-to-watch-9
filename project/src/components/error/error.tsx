@@ -21,7 +21,6 @@ function Error(): JSX.Element {
             <small>Page not found</small>
           </h2>
           <Link to={AppRoute.Main}>Go to main page</Link>
-
         </div>
 
         <Footer />

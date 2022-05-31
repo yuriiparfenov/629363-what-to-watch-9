@@ -13,7 +13,6 @@ store.dispatch(fetchFilmsAction());
 store.dispatch(fetchPromoFilmAction());
 store.dispatch(checkAuthorizationAction());
 
-
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

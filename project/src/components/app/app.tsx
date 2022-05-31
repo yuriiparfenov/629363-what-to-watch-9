@@ -22,7 +22,6 @@ function App(): JSX.Element {
   return (
     <Routes>
       <Route path={AppRoute.Main} element={<MainPage />} />
-
       <Route path={AppRoute.Login} element={<SignIn />} />
 
       <Route
